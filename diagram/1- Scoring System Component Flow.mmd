@@ -1,0 +1,40 @@
+flowchart LR
+    %% ==== Katmanlar ====
+    subgraph Client["Endpoint / Client"]
+      EP[Collector Agent]
+    end
+
+    subgraph Core["Core Services"]
+      RE["Rule Engine<br/>(YAML DSL & YARA)"]
+      SC[Scoring Service]
+      LLM[LLM Orchestrator]
+      POL[Policy & Guardrails]
+      MCP[MCP Integration Layer]
+    end
+
+    subgraph Viz["Observability"]
+      DB[(Score & Audit DB)]
+      UI[Dashboard / API]
+    end
+
+    subgraph Admin["Administrator"]
+      ADM[Security Admin]
+    end
+
+    %% ==== Ana Akış ====
+    EP -->|1. Telemetry JSON| RE
+    RE -->|2. Check Results| SC
+    SC -->|3. Scores & Findings| LLM
+    LLM -->|4. Proposed Runbooks| POL
+    POL -->|5. Approved Actions| MCP
+    MCP -->|6. Apply Changes| EP
+
+    %% ==== Raporlama & Log ====
+    SC -->|Scores| DB
+    MCP -->|Execution Logs| DB
+    POL -->|Policy Logs| DB
+    DB --> UI
+
+    %% ==== Admin Etkileşimi ====
+    ADM -->|View Scores & Logs| UI
+    ADM -->|Approve Fixes| POL

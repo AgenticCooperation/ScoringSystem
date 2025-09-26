@@ -1,0 +1,24 @@
+sequenceDiagram
+    participant EP as Endpoint (Collector)
+    participant RE as Rule Engine
+    participant SC as Scoring Service
+    participant LLM as LLM Orchestrator
+    participant POL as Policy/Guardrails
+    participant MCP as MCP Layer
+    participant DB as Score DB
+    participant UI as Dashboard
+    participant ADM as Security Admin
+
+    EP->>RE: 1. Send Telemetry (JSON)
+    RE->>SC: 2. Return Check Results
+    SC->>LLM: 3. Scores + Findings
+    LLM->>POL: 4. Proposed Runbooks
+    POL-->>LLM: 5. Approve / Reject
+    POL->>MCP: 6. Approved Actions
+    MCP->>EP: 7. Apply Changes
+    SC->>DB: 8. Store Scores
+    MCP->>DB: 9. Store Execution Logs
+    POL->>DB: 10. Store Policy Logs
+    DB->>UI: 11. Serve Dashboards
+    ADM->>UI: View Scores & Logs
+    ADM->>POL: Approve High-impact Fixes
