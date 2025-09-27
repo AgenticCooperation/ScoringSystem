@@ -1,0 +1,21 @@
+rule:
+  id: "os_patches"
+  name: "İşletim Sistemi Yama Kontrolü"
+  description: "Kritik güvenlik yamalarının yüklenip yüklenmediğini kontrol eder"
+  category: "system_security"
+  severity: "critical"
+  weight: 12
+  
+check:
+  field: "security.updates.critical_updates_pending"
+  operator: "equals"
+  expected_value: 0
+  
+message:
+  pass: "Tüm kritik güvenlik yamaları yüklü"
+  fail: "Kritik güvenlik yamaları bekliyor - acil müdahale gerekli!"
+  
+remediation:
+  action: "install_critical_updates"
+  script: "scripts/install_updates.ps1"
+  description: "Kritik güvenlik yamalarını yükle"

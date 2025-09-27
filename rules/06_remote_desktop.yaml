@@ -1,0 +1,21 @@
+rule:
+  id: "remote_desktop_secure"
+  name: "Uzak Masaüstü Güvenlik Kontrolü"
+  description: "Uzak masaüstü erişiminin güvenli yapılandırılıp yapılandırılmadığını kontrol eder"
+  category: "remote_access"
+  severity: "high"
+  weight: 8
+  
+check:
+  field: "config_hygiene.remote_desktop_enabled"
+  operator: "equals"
+  expected_value: false
+  
+message:
+  pass: "Uzak masaüstü devre dışı veya güvenli yapılandırılmış"
+  fail: "Uzak masaüstü güvensiz yapılandırma - risk!"
+  
+remediation:
+  action: "secure_remote_desktop"
+  script: "scripts/secure_remote_desktop.ps1"
+  description: "Uzak masaüstü erişimini güvenli hale getir"

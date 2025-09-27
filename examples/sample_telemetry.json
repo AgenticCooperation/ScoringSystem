@@ -1,0 +1,56 @@
+{
+  "endpoint_id": "WIN-DESKTOP-001",
+  "timestamp": "2024-01-15T10:30:00Z",
+  "system": {
+    "os": {
+      "name": "Windows",
+      "version": "10.0.19045",
+      "patch_level": "2024-01",
+      "architecture": "x64"
+    },
+    "hostname": "DESKTOP-ABC123",
+    "domain": "company.local",
+    "uptime_days": 15
+  },
+  "security": {
+    "firewall": {
+      "enabled": false,
+      "profile": "Private",
+      "rules_count": 12
+    },
+    "antivirus": {
+      "status": "enabled",
+      "last_update_days": 3,
+      "real_time_protection": true,
+      "vendor": "Windows Defender"
+    },
+    "updates": {
+      "last_check_days": 2,
+      "pending_updates": 5,
+      "critical_updates_pending": 2
+    },
+    "users": {
+      "admin_count": 2,
+      "last_login_days": 1,
+      "password_expiry_days": 30
+    },
+    "services": {
+      "running_services": 45,
+      "stopped_services": 8,
+      "suspicious_services": []
+    },
+    "network": {
+      "open_ports": [80, 443, 3389, 22],
+      "listening_services": ["http", "rdp", "ssh"],
+      "remote_connections": 1
+    }
+  },
+  "config_hygiene": {
+    "empty_passwords": false,
+    "default_accounts": true,
+    "guest_account_enabled": true,
+    "auto_login_enabled": false,
+    "remote_desktop_enabled": true,
+    "file_sharing_enabled": false
+  }
+}

@@ -1,0 +1,21 @@
+rule:
+  id: "antivirus_updated"
+  name: "Antivirüs Güncelleme Kontrolü"
+  description: "Antivirüs tanımlarının güncel olup olmadığını kontrol eder"
+  category: "malware_protection"
+  severity: "high"
+  weight: 8
+  
+check:
+  field: "security.antivirus.last_update_days"
+  operator: "less_than"
+  expected_value: 7
+  
+message:
+  pass: "Antivirüs tanımları güncel (7 günden az)"
+  fail: "Antivirüs tanımları güncel değil - güvenlik riski!"
+  
+remediation:
+  action: "update_antivirus"
+  script: "scripts/update_antivirus.ps1"
+  description: "Antivirüs tanımlarını güncelle"

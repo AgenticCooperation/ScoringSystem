@@ -1,0 +1,21 @@
+rule:
+  id: "firewall_enabled"
+  name: "Firewall Etkin Kontrolü"
+  description: "Sistem güvenlik duvarının etkin olup olmadığını kontrol eder"
+  category: "network_security"
+  severity: "high"
+  weight: 10
+  
+check:
+  field: "secur ity.firewall.enabled"
+  operator: "equals"
+  expected_value: true
+  
+message:
+  pass: "Güvenlik duvarı etkin durumda"
+  fail: "Güvenlik duvarı devre dışı - kritik güvenlik riski!"
+  
+remediation:
+  action: "enable_firewall"
+  script: "scripts/enable_firewall.ps1"
+  description: "Güvenlik duvarını etkinleştir"

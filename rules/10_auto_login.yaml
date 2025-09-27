@@ -1,0 +1,21 @@
+rule:
+  id: "auto_login_disabled"
+  name: "Otomatik Giriş Kontrolü"
+  description: "Otomatik giriş özelliğinin devre dışı olup olmadığını kontrol eder"
+  category: "access_control"
+  severity: "medium"
+  weight: 7
+  
+check:
+  field: "config_hygiene.auto_login_enabled"
+  operator: "equals"
+  expected_value: false
+  
+message:
+  pass: "Otomatik giriş devre dışı"
+  fail: "Otomatik giriş etkin - güvenlik riski!"
+  
+remediation:
+  action: "disable_auto_login"
+  script: "scripts/disable_auto_login.ps1"
+  description: "Otomatik giriş özelliğini devre dışı bırak"

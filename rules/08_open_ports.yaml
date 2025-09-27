@@ -1,0 +1,21 @@
+rule:
+  id: "open_ports_secure"
+  name: "Açık Port Kontrolü"
+  description: "Sistemde açık olan portların güvenli olup olmadığını kontrol eder"
+  category: "network_security"
+  severity: "high"
+  weight: 9
+  
+check:
+  field: "security.network.open_ports"
+  operator: "not_contains"
+  expected_value: [22, 23, 135, 139, 445, 3389]
+  
+message:
+  pass: "Açık portlar güvenli görünüyor"
+  fail: "Güvensiz portlar açık - risk!"
+  
+remediation:
+  action: "close_risky_ports"
+  script: "scripts/close_risky_ports.ps1"
+  description: "Güvensiz portları kapat"

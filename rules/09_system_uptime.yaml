@@ -1,0 +1,21 @@
+rule:
+  id: "system_uptime_reasonable"
+  name: "Sistem Çalışma Süresi Kontrolü"
+  description: "Sistemin makul bir süre çalışıp çalışmadığını kontrol eder"
+  category: "system_health"
+  severity: "low"
+  weight: 3
+  
+check:
+  field: "system.uptime_days"
+  operator: "less_than"
+  expected_value: 365
+  
+message:
+  pass: "Sistem makul süre çalışıyor"
+  fail: "Sistem çok uzun süre çalışıyor - yeniden başlatma önerilir"
+  
+remediation:
+  action: "schedule_reboot"
+  script: "scripts/schedule_reboot.ps1"
+  description: "Sistem yeniden başlatması planla"

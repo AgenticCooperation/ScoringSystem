@@ -1,0 +1,21 @@
+rule:
+  id: "guest_account_disabled"
+  name: "Misafir Hesap Kontrolü"
+  description: "Misafir hesabının devre dışı olup olmadığını kontrol eder"
+  category: "access_control"
+  severity: "medium"
+  weight: 5
+  
+check:
+  field: "config_hygiene.guest_account_enabled"
+  operator: "equals"
+  expected_value: false
+  
+message:
+  pass: "Misafir hesabı devre dışı"
+  fail: "Misafir hesabı etkin - güvenlik riski!"
+  
+remediation:
+  action: "disable_guest_account"
+  script: "scripts/disable_guest_account.ps1"
+  description: "Misafir hesabını devre dışı bırak"

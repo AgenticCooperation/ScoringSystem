@@ -1,0 +1,21 @@
+rule:
+  id: "admin_accounts_limit"
+  name: "Yönetici Hesap Sayısı Kontrolü"
+  description: "Sistemdeki yönetici hesap sayısının makul sınırlar içinde olup olmadığını kontrol eder"
+  category: "access_control"
+  severity: "medium"
+  weight: 6
+  
+check:
+  field: "security.users.admin_count"
+  operator: "less_than_or_equal"
+  expected_value: 3
+  
+message:
+  pass: "Yönetici hesap sayısı makul sınırlarda"
+  fail: "Çok fazla yönetici hesabı - güvenlik riski!"
+  
+remediation:
+  action: "review_admin_accounts"
+  script: "scripts/review_admin_accounts.ps1"
+  description: "Yönetici hesaplarını gözden geçir ve gereksizleri kaldır"
