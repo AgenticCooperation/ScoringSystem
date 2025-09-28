@@ -1,0 +1,21 @@
+rule:
+  id: "cpu_usage"
+  name: "CPU Kullanımı Kontrolü"
+  description: "CPU kullanımının normal olup olmadığını kontrol eder"
+  category: "performance"
+  severity: "medium"
+  weight: 4
+  
+check:
+  field: "security.performance.cpu_usage_percent"
+  operator: "less_than_or_equal"
+  expected_value: 80
+  
+message:
+  pass: "CPU kullanımı normal (80% veya daha az)"
+  fail: "CPU kullanımı yüksek - performans sorunu"
+  
+remediation:
+  action: "optimize_cpu_usage"
+  script: "scripts/optimize_cpu_usage.ps1"
+  description: "CPU kullanımını optimize et"

@@ -1,0 +1,21 @@
+rule:
+  id: "log_retention"
+  name: "Log Saklama Süresi Kontrolü"
+  description: "Log saklama süresinin yeterli olup olmadığını kontrol eder"
+  category: "logging"
+  severity: "medium"
+  weight: 5
+  
+check:
+  field: "security.logging.log_retention_days"
+  operator: "greater_than_or_equal"
+  expected_value: 90
+  
+message:
+  pass: "Log saklama süresi yeterli (90+ gün)"
+  fail: "Log saklama süresi yetersiz - compliance riski"
+  
+remediation:
+  action: "increase_log_retention"
+  script: "scripts/increase_log_retention.ps1"
+  description: "Log saklama süresini artır"

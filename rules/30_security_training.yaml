@@ -1,0 +1,21 @@
+rule:
+  id: "security_training"
+  name: "Güvenlik Eğitimi Kontrolü"
+  description: "Güvenlik eğitiminin tamamlanıp tamamlanmadığını kontrol eder"
+  category: "security_training"
+  severity: "medium"
+  weight: 5
+  
+check:
+  field: "security.security_training.security_training_completed"
+  operator: "equals"
+  expected_value: true
+  
+message:
+  pass: "Güvenlik eğitimi tamamlanmış"
+  fail: "Güvenlik eğitimi tamamlanmamış - farkındalık riski"
+  
+remediation:
+  action: "complete_security_training"
+  script: "scripts/complete_security_training.ps1"
+  description: "Güvenlik eğitimini tamamla"

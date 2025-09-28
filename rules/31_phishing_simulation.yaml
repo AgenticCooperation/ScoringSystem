@@ -1,0 +1,21 @@
+rule:
+  id: "phishing_simulation"
+  name: "Phishing Simülasyon Skoru Kontrolü"
+  description: "Phishing simülasyon skorunun yeterli olup olmadığını kontrol eder"
+  category: "security_training"
+  severity: "medium"
+  weight: 4
+  
+check:
+  field: "security.security_training.phishing_simulation_score"
+  operator: "greater_than_or_equal"
+  expected_value: 80
+  
+message:
+  pass: "Phishing simülasyon skoru iyi (80+)"
+  fail: "Phishing simülasyon skoru düşük - eğitim gerekli"
+  
+remediation:
+  action: "improve_phishing_awareness"
+  script: "scripts/improve_phishing_awareness.ps1"
+  description: "Phishing farkındalığını artır"

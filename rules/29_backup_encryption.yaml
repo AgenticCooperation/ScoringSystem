@@ -1,0 +1,21 @@
+rule:
+  id: "backup_encryption"
+  name: "Yedekleme Şifreleme Kontrolü"
+  description: "Yedeklemenin şifrelenip şifrelenmediğini kontrol eder"
+  category: "backup_recovery"
+  severity: "high"
+  weight: 7
+  
+check:
+  field: "security.backup_recovery.backup_encrypted"
+  operator: "equals"
+  expected_value: true
+  
+message:
+  pass: "Yedekleme şifreli"
+  fail: "Yedekleme şifrelenmemiş - güvenlik riski"
+  
+remediation:
+  action: "encrypt_backup"
+  script: "scripts/encrypt_backup.ps1"
+  description: "Yedeklemeyi şifrele"

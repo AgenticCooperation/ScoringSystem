@@ -1,0 +1,21 @@
+rule:
+  id: "system_stability"
+  name: "Sistem Kararlılığı Kontrolü"
+  description: "Sistem kararlılık skorunun yeterli olup olmadığını kontrol eder"
+  category: "system_health"
+  severity: "high"
+  weight: 7
+  
+check:
+  field: "security.health.system_stability_score"
+  operator: "greater_than_or_equal"
+  expected_value: 80
+  
+message:
+  pass: "Sistem kararlılığı iyi (80+ skor)"
+  fail: "Sistem kararlılığı düşük - sistem sorunları var"
+  
+remediation:
+  action: "improve_system_stability"
+  script: "scripts/improve_system_stability.ps1"
+  description: "Sistem kararlılığını iyileştir"

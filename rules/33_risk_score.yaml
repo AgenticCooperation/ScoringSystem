@@ -1,0 +1,21 @@
+rule:
+  id: "risk_score"
+  name: "Risk Skoru Kontrolü"
+  description: "Risk skorunun kabul edilebilir olup olmadığını kontrol eder"
+  category: "risk_assessment"
+  severity: "high"
+  weight: 8
+  
+check:
+  field: "security.risk_assessment.risk_score"
+  operator: "less_than_or_equal"
+  expected_value: 30
+  
+message:
+  pass: "Risk skoru kabul edilebilir (30 veya daha az)"
+  fail: "Risk skoru yüksek - risk azaltma gerekli"
+  
+remediation:
+  action: "reduce_risk_score"
+  script: "scripts/reduce_risk_score.ps1"
+  description: "Risk skorunu azalt"

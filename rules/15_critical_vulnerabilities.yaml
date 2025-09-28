@@ -1,0 +1,21 @@
+rule:
+  id: "critical_vulnerabilities"
+  name: "Kritik Güvenlik Açıkları Kontrolü"
+  description: "Kritik güvenlik açıklarının olup olmadığını kontrol eder"
+  category: "vulnerability_management"
+  severity: "critical"
+  weight: 15
+  
+check:
+  field: "security.vulnerabilities.critical_vulns"
+  operator: "equals"
+  expected_value: 0
+  
+message:
+  pass: "Kritik güvenlik açığı yok"
+  fail: "Kritik güvenlik açıkları tespit edildi - acil müdahale gerekli!"
+  
+remediation:
+  action: "patch_critical_vulnerabilities"
+  script: "scripts/patch_critical_vulnerabilities.ps1"
+  description: "Kritik güvenlik açıklarını yamala"

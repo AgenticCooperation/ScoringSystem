@@ -1,0 +1,21 @@
+rule:
+  id: "dlp_enabled"
+  name: "DLP Kontrolü"
+  description: "Data Loss Prevention'ın etkin olup olmadığını kontrol eder"
+  category: "data_protection"
+  severity: "high"
+  weight: 9
+  
+check:
+  field: "security.data_protection.dlp_enabled"
+  operator: "equals"
+  expected_value: true
+  
+message:
+  pass: "Data Loss Prevention etkin"
+  fail: "DLP devre dışı - veri sızıntısı riski"
+  
+remediation:
+  action: "enable_dlp"
+  script: "scripts/enable_dlp.ps1"
+  description: "Data Loss Prevention'ı etkinleştir"

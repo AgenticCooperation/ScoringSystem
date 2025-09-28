@@ -1,0 +1,21 @@
+rule:
+  id: "memory_usage"
+  name: "Bellek Kullanımı Kontrolü"
+  description: "Bellek kullanımının normal olup olmadığını kontrol eder"
+  category: "performance"
+  severity: "medium"
+  weight: 4
+  
+check:
+  field: "security.performance.memory_usage_percent"
+  operator: "less_than_or_equal"
+  expected_value: 85
+  
+message:
+  pass: "Bellek kullanımı normal (85% veya daha az)"
+  fail: "Bellek kullanımı yüksek - performans sorunu"
+  
+remediation:
+  action: "optimize_memory_usage"
+  script: "scripts/optimize_memory_usage.ps1"
+  description: "Bellek kullanımını optimize et"

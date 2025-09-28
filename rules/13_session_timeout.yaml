@@ -1,0 +1,21 @@
+rule:
+  id: "session_timeout"
+  name: "Oturum Zaman Aşımı Kontrolü"
+  description: "Oturum zaman aşımının güvenli olup olmadığını kontrol eder"
+  category: "access_control"
+  severity: "medium"
+  weight: 5
+  
+check:
+  field: "security.session_management.session_timeout_minutes"
+  operator: "less_than_or_equal"
+  expected_value: 30
+  
+message:
+  pass: "Oturum zaman aşımı güvenli (30 dk veya daha az)"
+  fail: "Oturum zaman aşımı çok uzun - güvenlik riski!"
+  
+remediation:
+  action: "reduce_session_timeout"
+  script: "scripts/reduce_session_timeout.ps1"
+  description: "Oturum zaman aşımını azalt"

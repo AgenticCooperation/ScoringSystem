@@ -1,0 +1,21 @@
+rule:
+  id: "incident_response_plan"
+  name: "Olay Müdahale Planı Kontrolü"
+  description: "Olay müdahale planının güncel olup olmadığını kontrol eder"
+  category: "incident_response"
+  severity: "high"
+  weight: 8
+  
+check:
+  field: "security.incident_response.response_plan_updated_days"
+  operator: "less_than_or_equal"
+  expected_value: 90
+  
+message:
+  pass: "Olay müdahale planı güncel (90 günden az)"
+  fail: "Olay müdahale planı eski - güncellenmeli"
+  
+remediation:
+  action: "update_incident_response_plan"
+  script: "scripts/update_incident_response_plan.ps1"
+  description: "Olay müdahale planını güncelle"

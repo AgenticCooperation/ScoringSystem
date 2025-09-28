@@ -1,0 +1,21 @@
+rule:
+  id: "risk_assessment_age"
+  name: "Risk Değerlendirmesi Yaşı Kontrolü"
+  description: "Son risk değerlendirmesinin ne kadar eski olduğunu kontrol eder"
+  category: "risk_assessment"
+  severity: "medium"
+  weight: 5
+  
+check:
+  field: "security.risk_assessment.last_assessment_days"
+  operator: "less_than_or_equal"
+  expected_value: 90
+  
+message:
+  pass: "Risk değerlendirmesi güncel (90 günden az)"
+  fail: "Risk değerlendirmesi eski - yeni değerlendirme gerekli"
+  
+remediation:
+  action: "run_risk_assessment"
+  script: "scripts/run_risk_assessment.ps1"
+  description: "Risk değerlendirmesi çalıştır"

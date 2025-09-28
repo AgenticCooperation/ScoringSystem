@@ -1,0 +1,21 @@
+rule:
+  id: "backup_frequency"
+  name: "Yedekleme Sıklığı Kontrolü"
+  description: "Son yedeklemenin ne kadar eski olduğunu kontrol eder"
+  category: "backup_recovery"
+  severity: "high"
+  weight: 8
+  
+check:
+  field: "security.backup_recovery.last_backup_days"
+  operator: "less_than_or_equal"
+  expected_value: 7
+  
+message:
+  pass: "Yedekleme güncel (7 günden az)"
+  fail: "Yedekleme eski - veri kaybı riski"
+  
+remediation:
+  action: "run_backup"
+  script: "scripts/run_backup.ps1"
+  description: "Yedekleme işlemini çalıştır"

@@ -1,0 +1,21 @@
+rule:
+  id: "mfa_enabled"
+  name: "Multi-Factor Authentication Kontrolü"
+  description: "MFA'nın etkin olup olmadığını kontrol eder"
+  category: "access_control"
+  severity: "high"
+  weight: 12
+  
+check:
+  field: "security.mfa.enabled"
+  operator: "equals"
+  expected_value: true
+  
+message:
+  pass: "Multi-Factor Authentication etkin"
+  fail: "MFA devre dışı - güvenlik riski!"
+  
+remediation:
+  action: "enable_mfa"
+  script: "scripts/enable_mfa.ps1"
+  description: "Multi-Factor Authentication'ı etkinleştir"

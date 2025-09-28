@@ -1,0 +1,21 @@
+rule:
+  id: "threat_detection"
+  name: "Tehdit Tespiti Kontrolü"
+  description: "Tehdit tespit sisteminin etkin olup olmadığını kontrol eder"
+  category: "threat_detection"
+  severity: "high"
+  weight: 9
+  
+check:
+  field: "security.threat_detection.behavioral_analytics"
+  operator: "equals"
+  expected_value: true
+  
+message:
+  pass: "Tehdit tespit sistemi etkin"
+  fail: "Tehdit tespit sistemi devre dışı - güvenlik riski"
+  
+remediation:
+  action: "enable_threat_detection"
+  script: "scripts/enable_threat_detection.ps1"
+  description: "Tehdit tespit sistemini etkinleştir"

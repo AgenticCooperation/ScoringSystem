@@ -1,0 +1,21 @@
+rule:
+  id: "siem_integration"
+  name: "SIEM Entegrasyonu Kontrolü"
+  description: "SIEM entegrasyonunun olup olmadığını kontrol eder"
+  category: "logging"
+  severity: "high"
+  weight: 9
+  
+check:
+  field: "security.logging.siem_integration"
+  operator: "equals"
+  expected_value: true
+  
+message:
+  pass: "SIEM entegrasyonu aktif"
+  fail: "SIEM entegrasyonu yok - merkezi log yönetimi eksik"
+  
+remediation:
+  action: "setup_siem_integration"
+  script: "scripts/setup_siem_integration.ps1"
+  description: "SIEM entegrasyonunu kur"

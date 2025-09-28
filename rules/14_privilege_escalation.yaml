@@ -1,0 +1,21 @@
+rule:
+  id: "privilege_escalation"
+  name: "Ayrıcalık Yükseltme Kontrolü"
+  description: "Ayrıcalık yükseltme denemelerini kontrol eder"
+  category: "access_control"
+  severity: "high"
+  weight: 10
+  
+check:
+  field: "security.privilege_management.privilege_escalation_attempts"
+  operator: "equals"
+  expected_value: 0
+  
+message:
+  pass: "Ayrıcalık yükseltme denemesi yok"
+  fail: "Ayrıcalık yükseltme denemeleri tespit edildi - şüpheli aktivite!"
+  
+remediation:
+  action: "investigate_privilege_escalation"
+  script: "scripts/investigate_privilege_escalation.ps1"
+  description: "Ayrıcalık yükseltme denemelerini araştır"

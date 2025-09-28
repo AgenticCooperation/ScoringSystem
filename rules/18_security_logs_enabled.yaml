@@ -1,0 +1,21 @@
+rule:
+  id: "security_logs_enabled"
+  name: "Güvenlik Logları Kontrolü"
+  description: "Güvenlik loglarının etkin olup olmadığını kontrol eder"
+  category: "logging"
+  severity: "high"
+  weight: 8
+  
+check:
+  field: "security.logging.security_logs_enabled"
+  operator: "equals"
+  expected_value: true
+  
+message:
+  pass: "Güvenlik logları etkin"
+  fail: "Güvenlik logları devre dışı - güvenlik riski!"
+  
+remediation:
+  action: "enable_security_logs"
+  script: "scripts/enable_security_logs.ps1"
+  description: "Güvenlik loglarını etkinleştir"

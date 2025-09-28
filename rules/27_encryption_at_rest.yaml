@@ -1,0 +1,21 @@
+rule:
+  id: "encryption_at_rest"
+  name: "Veri Şifreleme Kontrolü"
+  description: "Verilerin şifrelenip şifrelenmediğini kontrol eder"
+  category: "data_protection"
+  severity: "critical"
+  weight: 12
+  
+check:
+  field: "security.data_protection.encryption_at_rest"
+  operator: "equals"
+  expected_value: true
+  
+message:
+  pass: "Veri şifreleme etkin"
+  fail: "Veri şifreleme yok - kritik güvenlik riski!"
+  
+remediation:
+  action: "enable_encryption"
+  script: "scripts/enable_encryption.ps1"
+  description: "Veri şifrelemeyi etkinleştir"

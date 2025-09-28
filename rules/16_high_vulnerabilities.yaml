@@ -1,0 +1,21 @@
+rule:
+  id: "high_vulnerabilities"
+  name: "Yüksek Risk Güvenlik Açıkları Kontrolü"
+  description: "Yüksek risk güvenlik açıklarının sayısını kontrol eder"
+  category: "vulnerability_management"
+  severity: "high"
+  weight: 10
+  
+check:
+  field: "security.vulnerabilities.high_vulns"
+  operator: "less_than_or_equal"
+  expected_value: 2
+  
+message:
+  pass: "Yüksek risk güvenlik açığı kabul edilebilir seviyede"
+  fail: "Çok fazla yüksek risk güvenlik açığı - acil müdahale gerekli!"
+  
+remediation:
+  action: "patch_high_vulnerabilities"
+  script: "scripts/patch_high_vulnerabilities.ps1"
+  description: "Yüksek risk güvenlik açıklarını yamala"
