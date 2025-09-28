@@ -83,6 +83,129 @@
       "locked_accounts": 0,
       "disabled_accounts": 1
     },
+    "mfa": {
+      "enabled": true,
+      "method": "TOTP",
+      "coverage_percent": 75,
+      "bypass_accounts": 1
+    },
+    "session_management": {
+      "session_timeout_minutes": 30,
+      "concurrent_sessions": 2,
+      "session_encryption": true,
+      "session_fixation_protection": true
+    },
+    "privilege_management": {
+      "privileged_accounts": 2,
+      "service_accounts": 8,
+      "orphaned_accounts": 0,
+      "excessive_privileges": 1,
+      "privilege_escalation_attempts": 0
+    },
+    "access_control": {
+      "rbac_enabled": true,
+      "principle_of_least_privilege": true,
+      "regular_access_reviews": true,
+      "access_certification_due": false,
+      "segregation_of_duties": true
+    },
+    "authentication": {
+      "ldap_integration": true,
+      "ad_integration": true,
+      "sso_enabled": false,
+      "biometric_auth": false,
+      "smart_card_auth": false
+    },
+    "account_security": {
+      "password_reuse_prevention": true,
+      "account_lockout_duration": 30,
+      "brute_force_protection": true,
+      "suspicious_login_detection": true,
+      "geolocation_restrictions": false
+    },
+    "vulnerabilities": {
+      "critical_vulns": 1,
+      "high_vulns": 3,
+      "medium_vulns": 8,
+      "unpatched_critical": 1,
+      "cve_count": 12,
+      "exploit_available": 2,
+      "last_scan_days": 5
+    },
+    "logging": {
+      "security_logs_enabled": true,
+      "audit_logs_enabled": true,
+      "log_retention_days": 90,
+      "log_forwarding_enabled": true,
+      "log_integrity_monitoring": true,
+      "siem_integration": true,
+      "log_encryption": true
+    },
+    "incident_response": {
+      "security_incidents_30d": 1,
+      "response_plan_updated_days": 30,
+      "incident_response_team_contact": "security@company.com",
+      "mttr_hours": 4,
+      "mttd_hours": 1
+    },
+    "performance": {
+      "cpu_usage_percent": 45.2,
+      "memory_usage_percent": 68.5,
+      "disk_usage_percent": 70.0,
+      "network_utilization_percent": 15.3,
+      "system_load": 2.1
+    },
+    "health": {
+      "system_stability_score": 85,
+      "error_rate_24h": 0.02,
+      "crash_count_7d": 0,
+      "blue_screen_count_30d": 0,
+      "hardware_failures": 0
+    },
+    "data_protection": {
+      "dlp_enabled": true,
+      "data_classification": "Confidential",
+      "encryption_at_rest": true,
+      "encryption_in_transit": true,
+      "data_masking": true,
+      "rights_management": true
+    },
+    "backup_recovery": {
+      "last_backup_days": 1,
+      "backup_encrypted": true,
+      "backup_verified": true,
+      "recovery_time_objective": 4,
+      "recovery_point_objective": 1,
+      "disaster_recovery_plan": true
+    },
+    "security_policies": {
+      "security_policy_updated_days": 15,
+      "acceptable_use_policy": true,
+      "data_handling_policy": true,
+      "incident_response_policy": true,
+      "business_continuity_plan": true
+    },
+    "security_training": {
+      "security_training_completed": true,
+      "last_training_days": 30,
+      "phishing_simulation_score": 85,
+      "awareness_campaigns": 2,
+      "training_compliance_rate": 90
+    },
+    "threat_detection": {
+      "behavioral_analytics": true,
+      "machine_learning_detection": true,
+      "sandbox_analysis": false,
+      "threat_hunting_queries": 5,
+      "ioc_matches": 0
+    },
+    "risk_assessment": {
+      "risk_score": 25,
+      "last_assessment_days": 30,
+      "risk_tolerance": "Low",
+      "mitigation_controls": 8,
+      "residual_risk": 15
+    },
     "services": {
       "running_services": 45,
       "stopped_services": 8,

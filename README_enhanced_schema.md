@@ -9,7 +9,7 @@ Telemetri alanlarını çok daha detaylı ve kapsamlı hale getirdik. Artık ger
 ### 🏗️ Ana Kategoriler
 
 1. **System** - Detaylı sistem bilgileri
-2. **Security** - Kapsamlı güvenlik durumu  
+2. **Security** - Kapsamlı güvenlik durumu (11 alt kategori)
 3. **Network** - Ağ güvenliği ve bağlantılar
 4. **Applications** - Uygulama güvenliği
 5. **Compliance** - Uyumluluk ve denetim
@@ -23,11 +23,28 @@ Telemetri alanlarını çok daha detaylı ve kapsamlı hale getirdik. Artık ger
 - **Hardware**: Donanım bilgileri (CPU, RAM, disk, TPM, Secure Boot)
 - **Network**: Hostname, domain, uptime, timezone
 
-#### Security Bölümü
+#### Security Bölümü (11 Alt Kategori)
 - **Firewall**: Detaylı firewall durumu ve logları
 - **Antivirus**: Kapsamlı AV durumu (cloud protection, behavior monitoring)
 - **Updates**: Güncelleme durumu (critical, security, optional)
 - **Users**: Kullanıcı yönetimi ve şifre politikaları
+- **MFA**: Multi-Factor Authentication durumu ve kapsamı
+- **Session Management**: Oturum yönetimi ve güvenliği
+- **Privilege Management**: Ayrıcalık yönetimi ve hesap güvenliği
+- **Access Control**: Erişim kontrolü ve RBAC
+- **Authentication**: Kimlik doğrulama yöntemleri
+- **Account Security**: Hesap güvenliği ve koruma
+- **Vulnerabilities**: Güvenlik açıkları ve CVE durumu
+- **Logging**: Log yönetimi ve SIEM entegrasyonu
+- **Incident Response**: Olay müdahale ve yanıt süreleri
+- **Performance**: Sistem performans metrikleri
+- **Health**: Sistem sağlık durumu
+- **Data Protection**: Veri koruma ve DLP
+- **Backup Recovery**: Yedekleme ve kurtarma
+- **Security Policies**: Güvenlik politikaları
+- **Security Training**: Eğitim ve farkındalık
+- **Threat Detection**: Tehdit tespiti ve analitik
+- **Risk Assessment**: Risk değerlendirmesi
 - **Services**: Servis durumları ve şüpheli servisler
 - **Processes**: Çalışan süreçler ve güvenlik analizi
 - **Files**: Dosya güvenliği ve şüpheli dosyalar
@@ -60,15 +77,30 @@ Telemetri alanlarını çok daha detaylı ve kapsamlı hale getirdik. Artık ger
 
 ## 📈 Veri Toplama Kapsamı
 
-### Güvenlik Alanları (8 ana kategori)
+### Güvenlik Alanları (20+ ana kategori)
 1. **Network Security** - Firewall, portlar, bağlantılar
 2. **Malware Protection** - Antivirüs, tehdit tespiti
 3. **System Security** - OS yamaları, güvenlik güncellemeleri
 4. **Access Control** - Kullanıcı yönetimi, şifre politikaları
-5. **Application Security** - Uygulama güvenliği, imzalama
-6. **Data Protection** - Şifreleme, yedekleme
-7. **Compliance** - Denetim, politika uyumu
-8. **Threat Detection** - Tehdit istihbaratı, anomali tespiti
+5. **Multi-Factor Authentication** - MFA durumu ve kapsamı
+6. **Session Management** - Oturum güvenliği
+7. **Privilege Management** - Ayrıcalık yönetimi
+8. **Authentication Methods** - Kimlik doğrulama yöntemleri
+9. **Account Security** - Hesap güvenliği
+10. **Vulnerability Management** - Güvenlik açıkları
+11. **Log Management** - Log yönetimi ve SIEM
+12. **Incident Response** - Olay müdahale
+13. **Performance Monitoring** - Sistem performansı
+14. **System Health** - Sistem sağlığı
+15. **Data Protection** - Veri koruma ve DLP
+16. **Backup & Recovery** - Yedekleme ve kurtarma
+17. **Security Policies** - Güvenlik politikaları
+18. **Security Training** - Eğitim ve farkındalık
+19. **Threat Detection** - Tehdit tespiti
+20. **Risk Assessment** - Risk değerlendirmesi
+21. **Application Security** - Uygulama güvenliği, imzalama
+22. **Compliance** - Denetim, politika uyumu
+23. **Threat Intelligence** - Tehdit istihbaratı, anomali tespiti
 
 ### Toplanan Veri Türleri
 - **Boolean**: Açık/kapalı durumlar
@@ -79,32 +111,49 @@ Telemetri alanlarını çok daha detaylı ve kapsamlı hale getirdik. Artık ger
 
 ## 🎯 Kural Geliştirme Potansiyeli
 
-Bu kapsamlı şema ile artık **50+ farklı güvenlik kuralı** yazabiliriz:
+Bu kapsamlı şema ile artık **100+ farklı güvenlik kuralı** yazabiliriz:
 
-### Yüksek Öncelikli Kurallar
+### Yüksek Öncelikli Kurallar (30+ kural)
 - Firewall durumu ve kuralları
 - Antivirüs güncelleme ve tarama
 - Kritik güvenlik yamaları
 - Şifre politikası uyumu
+- MFA kapsamı ve yöntemi
+- Oturum güvenliği
+- Ayrıcalık yönetimi
+- Hesap güvenliği
+- Güvenlik açıkları (CVE)
+- Log yönetimi ve SIEM
+- Olay müdahale süreleri
 - Disk şifreleme durumu
 - Denetim logları
 - Şüpheli süreçler
 - Açık portlar
 - Sertifika durumu
 
-### Orta Öncelikli Kurallar
+### Orta Öncelikli Kurallar (40+ kural)
 - Servis güvenliği
 - Registry güvenliği
 - Ağ konfigürasyonu
 - Uygulama güvenliği
 - Yedekleme durumu
 - VPN kullanımı
-
-### Düşük Öncelikli Kurallar
+- Veri koruma (DLP)
+- Güvenlik politikaları
+- Eğitim ve farkındalık
+- Tehdit tespiti
+- Risk değerlendirmesi
 - Sistem performansı
+- Sistem sağlığı
+
+### Düşük Öncelikli Kurallar (30+ kural)
 - Donanım güvenliği
 - Tarayıcı eklentileri
 - Coğrafi anormallikler
+- Kimlik doğrulama yöntemleri
+- Erişim kontrolü
+- Hesap kilitleme
+- Şüpheli giriş tespiti
 
 ## 📁 Güncellenmiş Dosya Yapısı
 
@@ -133,11 +182,37 @@ Bu kapsamlı şema ile artık:
 
 ## ✅ Hazır Olan Bileşenler
 
-- ✅ **Kapsamlı JSON şema** (377 satır, 7 ana kategori)
-- ✅ **Detaylı örnek veri** (282 satır, gerçekçi veriler)
+- ✅ **Kapsamlı JSON şema** (552 satır, 7 ana kategori, 20+ alt kategori)
+- ✅ **Detaylı örnek veri** (400+ satır, gerçekçi veriler)
 - ✅ **10 temel kural** (mevcut)
-- ✅ **50+ kural potansiyeli** (yeni şemaya göre)
+- ✅ **100+ kural potansiyeli** (yeni şemaya göre)
 - ✅ **Enterprise seviye** güvenlik kapsamı
+- ✅ **Modern güvenlik standartları** (MFA, DLP, SIEM, Risk Assessment)
+
+## 🆕 Yeni Eklenen Alanlar
+
+### User Access & Authentication
+- **MFA**: Multi-Factor Authentication durumu
+- **Session Management**: Oturum güvenliği
+- **Privilege Management**: Ayrıcalık yönetimi
+- **Access Control**: Erişim kontrolü
+- **Authentication**: Kimlik doğrulama yöntemleri
+- **Account Security**: Hesap güvenliği
+
+### Security Operations
+- **Vulnerabilities**: Güvenlik açıkları ve CVE
+- **Logging**: Log yönetimi ve SIEM
+- **Incident Response**: Olay müdahale
+- **Threat Detection**: Tehdit tespiti
+- **Risk Assessment**: Risk değerlendirmesi
+
+### Data & System Protection
+- **Data Protection**: Veri koruma ve DLP
+- **Backup Recovery**: Yedekleme ve kurtarma
+- **Security Policies**: Güvenlik politikaları
+- **Security Training**: Eğitim ve farkındalık
+- **Performance**: Sistem performansı
+- **Health**: Sistem sağlığı
 
 **Sonraki adım**: Collector POC geliştirme veya yeni kural yazma!
 

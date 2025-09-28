@@ -127,6 +127,180 @@
             "disabled_accounts": {"type": "number", "minimum": 0}
           }
         },
+        "mfa": {
+          "type": "object",
+          "properties": {
+            "enabled": {"type": "boolean"},
+            "method": {"type": "string", "enum": ["SMS", "TOTP", "Hardware", "Biometric", "Push"]},
+            "coverage_percent": {"type": "number", "minimum": 0, "maximum": 100},
+            "bypass_accounts": {"type": "number", "minimum": 0}
+          }
+        },
+        "session_management": {
+          "type": "object",
+          "properties": {
+            "session_timeout_minutes": {"type": "number", "minimum": 0},
+            "concurrent_sessions": {"type": "number", "minimum": 0},
+            "session_encryption": {"type": "boolean"},
+            "session_fixation_protection": {"type": "boolean"}
+          }
+        },
+        "privilege_management": {
+          "type": "object",
+          "properties": {
+            "privileged_accounts": {"type": "number", "minimum": 0},
+            "service_accounts": {"type": "number", "minimum": 0},
+            "orphaned_accounts": {"type": "number", "minimum": 0},
+            "excessive_privileges": {"type": "number", "minimum": 0},
+            "privilege_escalation_attempts": {"type": "number", "minimum": 0}
+          }
+        },
+        "access_control": {
+          "type": "object",
+          "properties": {
+            "rbac_enabled": {"type": "boolean"},
+            "principle_of_least_privilege": {"type": "boolean"},
+            "regular_access_reviews": {"type": "boolean"},
+            "access_certification_due": {"type": "boolean"},
+            "segregation_of_duties": {"type": "boolean"}
+          }
+        },
+        "authentication": {
+          "type": "object",
+          "properties": {
+            "ldap_integration": {"type": "boolean"},
+            "ad_integration": {"type": "boolean"},
+            "sso_enabled": {"type": "boolean"},
+            "biometric_auth": {"type": "boolean"},
+            "smart_card_auth": {"type": "boolean"}
+          }
+        },
+        "account_security": {
+          "type": "object",
+          "properties": {
+            "password_reuse_prevention": {"type": "boolean"},
+            "account_lockout_duration": {"type": "number", "minimum": 0},
+            "brute_force_protection": {"type": "boolean"},
+            "suspicious_login_detection": {"type": "boolean"},
+            "geolocation_restrictions": {"type": "boolean"}
+          }
+        },
+        "vulnerabilities": {
+          "type": "object",
+          "properties": {
+            "critical_vulns": {"type": "number", "minimum": 0},
+            "high_vulns": {"type": "number", "minimum": 0},
+            "medium_vulns": {"type": "number", "minimum": 0},
+            "unpatched_critical": {"type": "number", "minimum": 0},
+            "cve_count": {"type": "number", "minimum": 0},
+            "exploit_available": {"type": "number", "minimum": 0},
+            "last_scan_days": {"type": "number", "minimum": 0}
+          }
+        },
+        "logging": {
+          "type": "object",
+          "properties": {
+            "security_logs_enabled": {"type": "boolean"},
+            "audit_logs_enabled": {"type": "boolean"},
+            "log_retention_days": {"type": "number", "minimum": 0},
+            "log_forwarding_enabled": {"type": "boolean"},
+            "log_integrity_monitoring": {"type": "boolean"},
+            "siem_integration": {"type": "boolean"},
+            "log_encryption": {"type": "boolean"}
+          }
+        },
+        "incident_response": {
+          "type": "object",
+          "properties": {
+            "security_incidents_30d": {"type": "number", "minimum": 0},
+            "response_plan_updated_days": {"type": "number", "minimum": 0},
+            "incident_response_team_contact": {"type": "string"},
+            "mttr_hours": {"type": "number", "minimum": 0},
+            "mttd_hours": {"type": "number", "minimum": 0}
+          }
+        },
+        "performance": {
+          "type": "object",
+          "properties": {
+            "cpu_usage_percent": {"type": "number", "minimum": 0, "maximum": 100},
+            "memory_usage_percent": {"type": "number", "minimum": 0, "maximum": 100},
+            "disk_usage_percent": {"type": "number", "minimum": 0, "maximum": 100},
+            "network_utilization_percent": {"type": "number", "minimum": 0, "maximum": 100},
+            "system_load": {"type": "number", "minimum": 0}
+          }
+        },
+        "health": {
+          "type": "object",
+          "properties": {
+            "system_stability_score": {"type": "number", "minimum": 0, "maximum": 100},
+            "error_rate_24h": {"type": "number", "minimum": 0},
+            "crash_count_7d": {"type": "number", "minimum": 0},
+            "blue_screen_count_30d": {"type": "number", "minimum": 0},
+            "hardware_failures": {"type": "number", "minimum": 0}
+          }
+        },
+        "data_protection": {
+          "type": "object",
+          "properties": {
+            "dlp_enabled": {"type": "boolean"},
+            "data_classification": {"type": "string", "enum": ["Public", "Internal", "Confidential", "Restricted"]},
+            "encryption_at_rest": {"type": "boolean"},
+            "encryption_in_transit": {"type": "boolean"},
+            "data_masking": {"type": "boolean"},
+            "rights_management": {"type": "boolean"}
+          }
+        },
+        "backup_recovery": {
+          "type": "object",
+          "properties": {
+            "last_backup_days": {"type": "number", "minimum": 0},
+            "backup_encrypted": {"type": "boolean"},
+            "backup_verified": {"type": "boolean"},
+            "recovery_time_objective": {"type": "number", "minimum": 0},
+            "recovery_point_objective": {"type": "number", "minimum": 0},
+            "disaster_recovery_plan": {"type": "boolean"}
+          }
+        },
+        "security_policies": {
+          "type": "object",
+          "properties": {
+            "security_policy_updated_days": {"type": "number", "minimum": 0},
+            "acceptable_use_policy": {"type": "boolean"},
+            "data_handling_policy": {"type": "boolean"},
+            "incident_response_policy": {"type": "boolean"},
+            "business_continuity_plan": {"type": "boolean"}
+          }
+        },
+        "security_training": {
+          "type": "object",
+          "properties": {
+            "security_training_completed": {"type": "boolean"},
+            "last_training_days": {"type": "number", "minimum": 0},
+            "phishing_simulation_score": {"type": "number", "minimum": 0, "maximum": 100},
+            "awareness_campaigns": {"type": "number", "minimum": 0},
+            "training_compliance_rate": {"type": "number", "minimum": 0, "maximum": 100}
+          }
+        },
+        "threat_detection": {
+          "type": "object",
+          "properties": {
+            "behavioral_analytics": {"type": "boolean"},
+            "machine_learning_detection": {"type": "boolean"},
+            "sandbox_analysis": {"type": "boolean"},
+            "threat_hunting_queries": {"type": "number", "minimum": 0},
+            "ioc_matches": {"type": "number", "minimum": 0}
+          }
+        },
+        "risk_assessment": {
+          "type": "object",
+          "properties": {
+            "risk_score": {"type": "number", "minimum": 0, "maximum": 100},
+            "last_assessment_days": {"type": "number", "minimum": 0},
+            "risk_tolerance": {"type": "string", "enum": ["Low", "Medium", "High"]},
+            "mitigation_controls": {"type": "number", "minimum": 0},
+            "residual_risk": {"type": "number", "minimum": 0, "maximum": 100}
+          }
+        },
         "services": {
           "type": "object",
           "properties": {
