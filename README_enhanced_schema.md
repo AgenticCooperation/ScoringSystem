@@ -113,40 +113,121 @@ Telemetri alanlarını çok daha detaylı ve kapsamlı hale getirdik. Artık ger
 
 Bu kapsamlı şema ile artık **100+ farklı güvenlik kuralı** yazabiliriz:
 
-### Yüksek Öncelikli Kurallar (30+ kural)
+### ✅ **Mevcut 35 Kural (Tamamlandı)**
+
+#### **Temel Güvenlik Kuralları (10 kural)**
 - Firewall durumu ve kuralları
 - Antivirüs güncelleme ve tarama
 - Kritik güvenlik yamaları
-- Şifre politikası uyumu
-- MFA kapsamı ve yöntemi
-- Oturum güvenliği
-- Ayrıcalık yönetimi
-- Hesap güvenliği
-- Güvenlik açıkları (CVE)
-- Log yönetimi ve SIEM
-- Olay müdahale süreleri
-- Disk şifreleme durumu
-- Denetim logları
-- Şüpheli süreçler
+- Boş şifre kontrolü
+- Misafir hesap kontrolü
+- Uzak masaüstü kontrolü
+- Admin hesap sayısı
 - Açık portlar
-- Sertifika durumu
+- Sistem uptime
+- Otomatik giriş
 
-### Orta Öncelikli Kurallar (40+ kural)
+#### **Yeni Eklenen Kurallar (25 kural)**
+
+**Multi-Factor Authentication (2 kural)**
+- MFA etkinlik kontrolü
+- MFA kapsam kontrolü
+
+**Session & Access Management (3 kural)**
+- Oturum zaman aşımı
+- Ayrıcalık yükseltme
+- Şifre politikası
+
+**Vulnerability Management (3 kural)**
+- Kritik güvenlik açıkları
+- Yüksek risk açıklar
+- Tarama yaşı
+
+**Logging & SIEM (3 kural)**
+- Güvenlik logları
+- SIEM entegrasyonu
+- Log saklama süresi
+
+**Incident Response (2 kural)**
+- Olay müdahale planı
+- MTTR performansı
+
+**Performance & Health (3 kural)**
+- CPU kullanımı
+- Bellek kullanımı
+- Sistem kararlılığı
+
+**Data Protection (4 kural)**
+- DLP kontrolü
+- Veri şifreleme
+- Yedekleme sıklığı
+- Yedekleme şifreleme
+
+**Security Training (2 kural)**
+- Güvenlik eğitimi
+- Phishing simülasyonu
+
+**Threat Detection & Risk (3 kural)**
+- Tehdit tespiti
+- Risk skoru
+- Risk değerlendirmesi
+
+## ⚖️ **Weight (Ağırlık) Sistemi**
+
+### **Weight Dağılımı (1-15 arası)**
+
+#### **Kritik Weight (12-15)**
+- `weight: 15` - Kritik güvenlik açıkları
+- `weight: 12` - Veri şifreleme, Antivirüs güncelleme
+- `weight: 10` - Firewall, MFA, Ayrıcalık yükseltme
+
+#### **Yüksek Weight (8-11)**
+- `weight: 9` - SIEM entegrasyonu, DLP
+- `weight: 8` - Log yönetimi, Yedekleme sıklığı, Risk skoru
+
+#### **Orta Weight (5-7)**
+- `weight: 7` - Sistem kararlılığı, Yedekleme şifreleme
+- `weight: 6` - MFA kapsamı, Log saklama, MTTR
+- `weight: 5` - Oturum zaman aşımı, CPU/Bellek kullanımı
+
+#### **Düşük Weight (1-4)**
+- `weight: 4` - Performans metrikleri
+- `weight: 3` - Eğitim ve farkındalık
+- `weight: 2` - Genel sistem durumu
+
+### **Scoring Hesaplaması**
+
+```python
+# Weight bazlı scoring formülü
+total_score = 0
+max_possible_score = 0
+
+for rule in rules:
+    if rule.check_passes():
+        total_score += rule.weight
+    max_possible_score += rule.weight
+
+security_score = (total_score / max_possible_score) * 100
+```
+
+### **Kategori Bazlı Weight Örnekleri**
+
+| Kategori | Ortalama Weight | Örnek Kural |
+|----------|----------------|-------------|
+| **Vulnerability Management** | 12.5 | Kritik açıklar (15) |
+| **Data Protection** | 9.5 | Veri şifreleme (12) |
+| **Access Control** | 8.0 | MFA etkinlik (10) |
+| **Logging & SIEM** | 7.3 | SIEM entegrasyonu (9) |
+| **Performance** | 4.5 | CPU kullanımı (4) |
+| **Training** | 3.5 | Güvenlik eğitimi (5) |
+
+### 🔮 **Gelecek Kural Potansiyeli (65+ kural)**
 - Servis güvenliği
 - Registry güvenliği
 - Ağ konfigürasyonu
 - Uygulama güvenliği
-- Yedekleme durumu
 - VPN kullanımı
-- Veri koruma (DLP)
 - Güvenlik politikaları
-- Eğitim ve farkındalık
-- Tehdit tespiti
-- Risk değerlendirmesi
-- Sistem performansı
-- Sistem sağlığı
-
-### Düşük Öncelikli Kurallar (30+ kural)
 - Donanım güvenliği
 - Tarayıcı eklentileri
 - Coğrafi anormallikler
@@ -164,8 +245,8 @@ ScoringSystem/
 ├── rules/
 │   ├── 01_firewall_enabled.yaml
 │   ├── 02_antivirus_updated.yaml
-│   ├── ... (10 mevcut kural)
-│   └── (50+ yeni kural yazılabilir)
+│   ├── ... (35 kapsamlı kural)
+│   └── (65+ yeni kural yazılabilir)
 ├── examples/
 │   └── sample_telemetry.json (KAPSAMLI ÖRNEK)
 └── README_enhanced_schema.md
@@ -176,7 +257,7 @@ ScoringSystem/
 Bu kapsamlı şema ile artık:
 
 1. **Collector POC** geliştirebiliriz - Bu şemaya uygun veri toplayan script
-2. **50+ YAML kural** yazabiliriz - Tüm güvenlik alanlarını kapsayan
+2. **35 YAML kural** tamamlandı - Tüm güvenlik alanlarını kapsayan
 3. **Rule Engine** geliştirebiliriz - Karmaşık kuralları işleyen
 4. **Scoring Service** oluşturabiliriz - Ağırlıklı skorlama sistemi
 
@@ -184,7 +265,7 @@ Bu kapsamlı şema ile artık:
 
 - ✅ **Kapsamlı JSON şema** (552 satır, 7 ana kategori, 20+ alt kategori)
 - ✅ **Detaylı örnek veri** (400+ satır, gerçekçi veriler)
-- ✅ **10 temel kural** (mevcut)
+- ✅ **35 kapsamlı kural** (10 mevcut + 25 yeni)
 - ✅ **100+ kural potansiyeli** (yeni şemaya göre)
 - ✅ **Enterprise seviye** güvenlik kapsamı
 - ✅ **Modern güvenlik standartları** (MFA, DLP, SIEM, Risk Assessment)
