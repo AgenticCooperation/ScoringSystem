@@ -248,7 +248,9 @@ ScoringSystem/
 │   ├── ... (35 kapsamlı kural)
 │   └── (65+ yeni kural yazılabilir)
 ├── examples/
-│   └── sample_telemetry.json (KAPSAMLI ÖRNEK)
+│   ├── sample_telemetry_windows.json (Windows Örneği)
+│   ├── sample_telemetry_macos.json (macOS Örneği)
+│   └── sample_telemetry_linux.json (Linux Örneği)
 └── README_enhanced_schema.md
 ```
 
@@ -264,7 +266,7 @@ Bu kapsamlı şema ile artık:
 ## ✅ Hazır Olan Bileşenler
 
 - ✅ **Kapsamlı JSON şema** (552 satır, 7 ana kategori, 20+ alt kategori)
-- ✅ **Detaylı örnek veri** (400+ satır, gerçekçi veriler)
+- ✅ **3 işletim sistemi örneği** (Windows, macOS, Linux)
 - ✅ **35 kapsamlı kural** (10 mevcut + 25 yeni)
 - ✅ **100+ kural potansiyeli** (yeni şemaya göre)
 - ✅ **Enterprise seviye** güvenlik kapsamı
@@ -294,6 +296,29 @@ Bu kapsamlı şema ile artık:
 - **Security Training**: Eğitim ve farkındalık
 - **Performance**: Sistem performansı
 - **Health**: Sistem sağlığı
+
+## 🖥️ **İşletim Sistemi Örnekleri**
+
+### **Windows Örneği** (`sample_telemetry_windows.json`)
+- **OS**: Windows 10 Pro (19045.3930)
+- **Donanım**: Dell OptiPlex 7090, 8 CPU, 16GB RAM
+- **Güvenlik**: Windows Defender, BitLocker, UAC
+- **Ağ**: Ethernet + WiFi, RDP, SMB
+- **Uygulamalar**: Chrome, Office, Windows servisleri
+
+### **macOS Örneği** (`sample_telemetry_macos.json`)
+- **OS**: macOS Sonoma (14.2.1)
+- **Donanım**: MacBook Pro, 8 CPU, 16GB RAM
+- **Güvenlik**: XProtect, FileVault, Touch ID
+- **Ağ**: WiFi + Bluetooth, VPN, DNS over HTTPS
+- **Uygulamalar**: Safari, Office, Apple servisleri
+
+### **Linux Örneği** (`sample_telemetry_linux.json`)
+- **OS**: Ubuntu 22.04.3 LTS
+- **Donanım**: Dell PowerEdge R740, 16 CPU, 32GB RAM
+- **Güvenlik**: ClamAV, LUKS, SSH
+- **Ağ**: Dual Ethernet, OpenVPN, Güvenli DNS
+- **Uygulamalar**: Apache, MySQL, Nginx, Redis
 
 **Sonraki adım**: Collector POC geliştirme veya yeni kural yazma!
 
