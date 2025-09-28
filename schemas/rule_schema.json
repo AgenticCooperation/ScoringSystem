@@ -1,0 +1,178 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Security Rule Schema",
+  "description": "Güvenlik kuralı şeması - Rule dosyalarının yapısını tanımlar",
+  "type": "object",
+  "required": ["rule"],
+  "properties": {
+    "rule": {
+      "type": "object",
+      "required": ["id", "name", "description", "category", "severity", "weight", "check", "message", "remediation"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Benzersiz kural kimliği (snake_case)",
+          "pattern": "^[a-z][a-z0-9_]*$",
+          "minLength": 3,
+          "maxLength": 50
+        },
+        "name": {
+          "type": "string",
+          "description": "Kural adı (Türkçe)",
+          "minLength": 5,
+          "maxLength": 100
+        },
+        "description": {
+          "type": "string",
+          "description": "Kuralın ne yaptığının detaylı açıklaması",
+          "minLength": 10,
+          "maxLength": 200
+        },
+        "category": {
+          "type": "string",
+          "description": "Kural kategorisi",
+          "enum": [
+            "network_security",
+            "malware_protection", 
+            "system_security",
+            "access_control",
+            "vulnerability_management",
+            "logging",
+            "incident_response",
+            "performance",
+            "system_health",
+            "data_protection",
+            "backup_recovery",
+            "security_policies",
+            "security_training",
+            "threat_detection",
+            "risk_assessment",
+            "application_security",
+            "compliance",
+            "threat_intelligence"
+          ]
+        },
+        "severity": {
+          "type": "string",
+          "description": "Kural önem seviyesi",
+          "enum": ["critical", "high", "medium", "low"]
+        },
+        "weight": {
+          "type": "number",
+          "description": "Kural ağırlığı (scoring için)",
+          "minimum": 1,
+          "maximum": 15
+        },
+        "check": {
+          "type": "object",
+          "description": "Kontrol mantığı",
+          "required": ["field", "operator", "expected_value"],
+          "properties": {
+            "field": {
+              "type": "string",
+              "description": "Telemetri verisindeki alan yolu",
+              "pattern": "^[a-zA-Z_][a-zA-Z0-9_.]*$",
+              "examples": [
+                "security.firewall.enabled",
+                "security.vulnerabilities.critical_vulns",
+                "security.performance.cpu_usage_percent"
+              ]
+            },
+            "operator": {
+              "type": "string",
+              "description": "Karşılaştırma operatörü",
+              "enum": [
+                "equals",
+                "not_equals", 
+                "greater_than",
+                "less_than",
+                "greater_than_or_equal",
+                "less_than_or_equal",
+                "contains",
+                "not_contains",
+                "in",
+                "not_in",
+                "is_null",
+                "is_not_null",
+                "starts_with",
+                "ends_with",
+                "regex_match"
+              ]
+            },
+            "expected_value": {
+              "description": "Beklenen değer (tip alan tipine göre değişir)",
+              "oneOf": [
+                {"type": "boolean"},
+                {"type": "number"},
+                {"type": "string"},
+                {"type": "array"}
+              ]
+            }
+          }
+        },
+        "message": {
+          "type": "object",
+          "description": "Kullanıcı mesajları",
+          "required": ["pass", "fail"],
+          "properties": {
+            "pass": {
+              "type": "string",
+              "description": "Kural başarılı olduğunda gösterilecek mesaj",
+              "minLength": 10,
+              "maxLength": 150
+            },
+            "fail": {
+              "type": "string", 
+              "description": "Kural başarısız olduğunda gösterilecek mesaj",
+              "minLength": 10,
+              "maxLength": 150
+            }
+          }
+        },
+        "remediation": {
+          "type": "object",
+          "description": "Otomatik düzeltme bilgileri",
+          "required": ["action", "description"],
+          "properties": {
+            "action": {
+              "type": "string",
+              "description": "Düzeltme aksiyonu kimliği",
+              "pattern": "^[a-z][a-z0-9_]*$",
+              "minLength": 3,
+              "maxLength": 50
+            },
+            "script": {
+              "type": "string",
+              "description": "Otomatik düzeltme scripti yolu",
+              "pattern": "^scripts/.*\\.(ps1|sh|py|bat)$"
+            },
+            "description": {
+              "type": "string",
+              "description": "Düzeltme işleminin açıklaması",
+              "minLength": 10,
+              "maxLength": 100
+            },
+            "manual_steps": {
+              "type": "array",
+              "description": "Manuel düzeltme adımları",
+              "items": {
+                "type": "string",
+                "minLength": 5,
+                "maxLength": 200
+              }
+            },
+            "prerequisites": {
+              "type": "array",
+              "description": "Düzeltme için gerekli önkoşullar",
+              "items": {
+                "type": "string",
+                "minLength": 5,
+                "maxLength": 100
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
