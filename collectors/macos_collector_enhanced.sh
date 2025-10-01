@@ -127,8 +127,18 @@ get_enhanced_application_info() {
     # Yüklü uygulamalar sayısı
     INSTALLED_APPS_COUNT=$(ls /Applications 2>/dev/null | wc -l || echo "0")
     
-    # Çalışan uygulamalar
-    RUNNING_APPS=$(ps aux 2>/dev/null | grep -v grep | awk '{print $11}' | sort | uniq | wc -l || echo "0")
+    # Çalışan uygulamalar sayısı
+    RUNNING_APPS_COUNT=$(ps aux 2>/dev/null | grep -v grep | awk '{print $11}' | sort | uniq | wc -l || echo "0")
+    
+    # Çalışan uygulamaları topla (Ana uygulamalar)
+    RUNNING_APPS_LIST=$(ps aux 2>/dev/null | grep -i "\.app/Contents/MacOS" | grep -v "Helper" | grep -v "grep" | awk -F'/' '{
+        for(i=1; i<=NF; i++) {
+            if($i ~ /\.app$/) {
+                gsub(/\.app$/, "", $i)
+                print $i
+            }
+        }
+    }' | sort -u || echo "")
     
     # Tarayıcı bilgileri
     CHROME_VERSION=$(defaults read /Applications/Google\ Chrome.app/Contents/Info.plist CFBundleShortVersionString 2>/dev/null || echo "")
@@ -395,7 +405,14 @@ cat << EOF
         \"category\": \"Browser\"
       }" || echo "")
     ],
-    "running_apps": [],
+    "running_apps": [$(echo "$RUNNING_APPS_LIST" | while read app; do
+      if [ -n "$app" ]; then
+        PID=$(ps aux | grep -i "$app" | grep -v grep | head -1 | awk '{print $2}')
+        CPU=$(ps aux | grep -i "$app" | grep -v grep | head -1 | awk '{print $3}')
+        MEM=$(ps aux | grep -i "$app" | grep -v grep | head -1 | awk '{print $4}')
+        echo "{\"name\": \"$app\", \"pid\": $PID, \"cpu_usage\": $CPU, \"memory_mb\": 0, \"network_connections\": 0, \"privileges\": \"User\"},"
+      fi
+    done | sed '$ s/,$//')],
     "browsers": [
       {
         "name": "Safari",
