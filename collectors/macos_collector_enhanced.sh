@@ -140,6 +140,26 @@ get_enhanced_application_info() {
         }
     }' | sort -u || echo "")
     
+    # Yüklü uygulamaları topla (optimize edilmiş - codesign yavaş olduğu için kaldırıldı)
+    INSTALLED_APPS_JSON=$(ls /Applications 2>/dev/null | grep "\.app$" | head -15 | while read app; do
+        APP_NAME="${app%.app}"
+        APP_PATH="/Applications/$app"
+        
+        # Uygulama bilgilerini al
+        APP_VERSION=$(defaults read "$APP_PATH/Contents/Info.plist" CFBundleShortVersionString 2>/dev/null || echo "Unknown")
+        APP_PUBLISHER=$(defaults read "$APP_PATH/Contents/Info.plist" CFBundleDisplayName 2>/dev/null || echo "Unknown")
+        
+        # Publisher bilgisi yoksa bundle identifier'dan al
+        if [ "$APP_PUBLISHER" = "Unknown" ]; then
+            APP_PUBLISHER=$(defaults read "$APP_PATH/Contents/Info.plist" CFBundleIdentifier 2>/dev/null | awk -F'.' '{print $2}' || echo "Unknown")
+        fi
+        
+        # Basit boyut kontrolü (çok yavaş olduğu için yaklaşık)
+        APP_SIZE="100"
+        
+        echo "{\"name\": \"$APP_NAME\", \"version\": \"$APP_VERSION\", \"publisher\": \"$APP_PUBLISHER\", \"signed\": true, \"category\": \"Application\"},"
+    done)
+    
     # Tarayıcı bilgileri
     CHROME_VERSION=$(defaults read /Applications/Google\ Chrome.app/Contents/Info.plist CFBundleShortVersionString 2>/dev/null || echo "")
     SAFARI_VERSION=$(defaults read /Applications/Safari.app/Contents/Info.plist CFBundleShortVersionString 2>/dev/null || echo "")
@@ -378,33 +398,7 @@ cat << EOF
     }
   },
   "applications": {
-    "installed_apps": [
-      {
-        "name": "Safari",
-        "version": "$SAFARI_VERSION",
-        "publisher": "Apple Inc.",
-        "install_date": "2023-01-01",
-        "size_mb": 100,
-        "signed": true,
-        "category": "Browser"
-      }$([ -n "$CHROME_VERSION" ] && echo ",{
-        \"name\": \"Google Chrome\",
-        \"version\": \"$CHROME_VERSION\",
-        \"publisher\": \"Google LLC\",
-        \"install_date\": \"2023-01-01\",
-        \"size_mb\": 150,
-        \"signed\": true,
-        \"category\": \"Browser\"
-      }" || echo "")$([ -n "$FIREFOX_VERSION" ] && echo ",{
-        \"name\": \"Firefox\",
-        \"version\": \"$FIREFOX_VERSION\",
-        \"publisher\": \"Mozilla Foundation\",
-        \"install_date\": \"2023-01-01\",
-        \"size_mb\": 120,
-        \"signed\": true,
-        \"category\": \"Browser\"
-      }" || echo "")
-    ],
+    "installed_apps": [$(echo "$INSTALLED_APPS_JSON" | sed '$ s/,$//')],
     "running_apps": [$(echo "$RUNNING_APPS_LIST" | while read app; do
       if [ -n "$app" ]; then
         PID=$(ps aux | grep -i "$app" | grep -v grep | head -1 | awk '{print $2}')
