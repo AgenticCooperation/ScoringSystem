@@ -46,8 +46,11 @@ get_enhanced_system_info() {
     HOSTNAME=$(hostname)
     DOMAIN=$(dsconfigad -show 2>/dev/null | grep "Active Directory Domain" | awk '{print $4}' || echo "")
     
-    # Timezone
-    TIMEZONE=$(systemsetup -gettimezone 2>/dev/null | awk '{print $3}' || echo "UTC")
+    # Timezone (doğru yöntem)
+    TIMEZONE=$(ls -la /etc/localtime 2>/dev/null | awk -F'/' '{print $NF}' || echo "UTC")
+    if [[ -z "$TIMEZONE" ]]; then
+        TIMEZONE=$(date +%Z)
+    fi
     
     # Son yeniden başlatma
     LAST_REBOOT=$(date -r $(sysctl -n kern.boottime | awk '{print $4}') -u +%Y-%m-%dT%H:%M:%SZ 2>/dev/null || echo "")
