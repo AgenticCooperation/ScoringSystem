@@ -12,11 +12,12 @@ YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
-echo -e "${BLUE}🍎 macOS Enhanced Collector başlatılıyor...${NC}"
+# Renkli çıktıyı kapat (JSON için)
+# echo -e "${BLUE}🍎 macOS Enhanced Collector başlatılıyor...${NC}"
 
 # Fonksiyonlar
 get_enhanced_system_info() {
-    echo -e "${YELLOW}📊 Gelişmiş sistem bilgileri toplanıyor...${NC}"
+    # echo -e "${YELLOW}📊 Gelişmiş sistem bilgileri toplanıyor...${NC}"
     
     # OS bilgileri
     OS_NAME=$(sw_vers -productName)
@@ -53,7 +54,7 @@ get_enhanced_system_info() {
 }
 
 get_enhanced_security_info() {
-    echo -e "${YELLOW}🔒 Gelişmiş güvenlik bilgileri toplanıyor...${NC}"
+    # echo -e "${YELLOW}🔒 Gelişmiş güvenlik bilgileri toplanıyor...${NC}"
     
     # Gatekeeper durumu
     GATEKEEPER_STATUS=$(spctl --status 2>/dev/null | grep "assessments" | awk '{print $2}' || echo "disabled")
@@ -67,8 +68,26 @@ get_enhanced_security_info() {
     # Firewall durumu
     FIREWALL_STATUS=$(defaults read /Library/Preferences/com.apple.alf globalstate 2>/dev/null || echo "0")
     
+    # Firewall profile (Private/Domain/Public)
+    FIREWALL_PROFILE="Private"
+    if [[ "$FIREWALL_STATUS" = "1" ]]; then
+        # Aktif firewall profili tespit et
+        FIREWALL_PROFILE=$(defaults read /Library/Preferences/com.apple.alf globalstate 2>/dev/null || echo "Private")
+    fi
+    
+    # Firewall rules count
+    FIREWALL_RULES_COUNT=$(pfctl -sr 2>/dev/null | wc -l || echo "0")
+    FIREWALL_INBOUND_RULES=$(pfctl -sr 2>/dev/null | grep -c "in" || echo "0")
+    FIREWALL_OUTBOUND_RULES=$(pfctl -sr 2>/dev/null | grep -c "out" || echo "0")
+    
     # XProtect bilgileri
     XPROTECT_VERSION=$(defaults read /System/Library/CoreServices/XProtect.bundle/Contents/Info.plist CFBundleShortVersionString 2>/dev/null || echo "Unknown")
+    
+    # XProtect son güncelleme
+    XPROTECT_LAST_UPDATE=$(defaults read /System/Library/CoreServices/XProtect.bundle/Contents/Info.plist CFBundleShortVersionString 2>/dev/null || echo "Unknown")
+    
+    # XProtect signature count
+    XPROTECT_SIGNATURE_COUNT=$(find /System/Library/CoreServices/XProtect.bundle -name "*.dat" 2>/dev/null | wc -l || echo "0")
     
     # Güncellemeler
     SOFTWARE_UPDATE_COUNT=$(softwareupdate -l 2>/dev/null | grep -c "Software Update found" || echo "0")
@@ -81,7 +100,7 @@ get_enhanced_security_info() {
 }
 
 get_enhanced_network_info() {
-    echo -e "${YELLOW}🌐 Gelişmiş ağ bilgileri toplanıyor...${NC}"
+    # echo -e "${YELLOW}🌐 Gelişmiş ağ bilgileri toplanıyor...${NC}"
     
     # Ağ arayüzleri
     ETHERNET_IP=$(ifconfig en0 2>/dev/null | grep 'inet ' | awk '{print $2}' || echo "")
@@ -100,7 +119,7 @@ get_enhanced_network_info() {
 }
 
 get_enhanced_application_info() {
-    echo -e "${YELLOW}📱 Gelişmiş uygulama bilgileri toplanıyor...${NC}"
+    # echo -e "${YELLOW}📱 Gelişmiş uygulama bilgileri toplanıyor...${NC}"
     
     # Yüklü uygulamalar sayısı
     INSTALLED_APPS_COUNT=$(ls /Applications 2>/dev/null | wc -l || echo "0")
@@ -115,10 +134,24 @@ get_enhanced_application_info() {
     
     # system_profiler ile uygulama bilgileri
     APPLICATIONS_INFO=$(system_profiler SPApplicationsDataType 2>/dev/null)
+    
+    # Güvenlik özellikleri
+    SECURE_BOOT_ENABLED=$(system_profiler SPiBridgeDataType 2>/dev/null | grep -i "secure boot" | grep -i "enabled" | wc -l)
+    TPM_ENABLED=$(system_profiler SPiBridgeDataType 2>/dev/null | grep -i "tpm" | grep -i "enabled" | wc -l)
+    TPM_VERSION=$(system_profiler SPiBridgeDataType 2>/dev/null | grep -i "tpm version" | awk -F': ' '{print $2}' | sed 's/^[ \t]*//' || echo "2.0")
+    
+    # SIP durumu
+    SIP_ENABLED=$(csrutil status 2>/dev/null | grep -i "enabled" | wc -l)
+    
+    # Gatekeeper durumu
+    GATEKEEPER_ENABLED=$(spctl --status 2>/dev/null | grep -i "enabled" | wc -l)
+    
+    # FileVault durumu
+    FILEVAULT_ENABLED=$(fdesetup status 2>/dev/null | grep -i "on" | wc -l)
 }
 
 get_enhanced_compliance_info() {
-    echo -e "${YELLOW}📋 Gelişmiş uyumluluk bilgileri toplanıyor...${NC}"
+    # echo -e "${YELLOW}📋 Gelişmiş uyumluluk bilgileri toplanıyor...${NC}"
     
     # Denetim logları
     AUDIT_ENABLED=$(sudo auditctl -s 2>/dev/null | grep "enabled" | awk '{print $2}' || echo "0")
@@ -135,6 +168,11 @@ get_enhanced_compliance_info() {
     
     # Sistem süreçleri
     TOTAL_PROCESSES=$(ps aux 2>/dev/null | wc -l || echo "0")
+    
+    # Servis bilgileri
+    RUNNING_SERVICES=$(launchctl list 2>/dev/null | grep -v "^-" | wc -l || echo "0")
+    STOPPED_SERVICES=$(launchctl list 2>/dev/null | grep "^-" | wc -l || echo "0")
+    AUTO_START_SERVICES=$(launchctl list 2>/dev/null | grep -v "^-" | grep -v "com.apple" | wc -l || echo "0")
 }
 
 # Ana veri toplama
@@ -144,7 +182,7 @@ get_enhanced_network_info
 get_enhanced_application_info
 get_enhanced_compliance_info
 
-echo -e "${GREEN}✅ Gelişmiş veri toplama tamamlandı!${NC}"
+# echo -e "${GREEN}✅ Gelişmiş veri toplama tamamlandı!${NC}"
 
 # JSON oluştur
 cat << EOF
@@ -174,9 +212,12 @@ cat << EOF
       "memory_info": "$MEMORY_INFO",
       "cpu_brand": "$CPU_BRAND",
       "serial_number": "$SERIAL_NUMBER",
-      "secure_boot_enabled": true,
-      "tpm_enabled": true,
-      "tpm_version": "2.0"
+      "secure_boot_enabled": $([ "$SECURE_BOOT_ENABLED" -gt 0 ] && echo "true" || echo "false"),
+      "tpm_enabled": $([ "$TPM_ENABLED" -gt 0 ] && echo "true" || echo "false"),
+      "tpm_version": "$TPM_VERSION",
+      "sip_enabled": $([ "$SIP_ENABLED" -gt 0 ] && echo "true" || echo "false"),
+      "gatekeeper_enabled": $([ "$GATEKEEPER_ENABLED" -gt 0 ] && echo "true" || echo "false"),
+      "filevault_enabled": $([ "$FILEVAULT_ENABLED" -gt 0 ] && echo "true" || echo "false")
     },
     "hostname": "$HOSTNAME",
     "domain": "$DOMAIN",
@@ -187,10 +228,10 @@ cat << EOF
   "security": {
     "firewall": {
       "enabled": $([ "$FIREWALL_STATUS" = "1" ] && echo "true" || echo "false"),
-      "profile": "Private",
-      "rules_count": 0,
-      "inbound_rules": 0,
-      "outbound_rules": 0,
+      "profile": "$FIREWALL_PROFILE",
+      "rules_count": $FIREWALL_RULES_COUNT,
+      "inbound_rules": $FIREWALL_INBOUND_RULES,
+      "outbound_rules": $FIREWALL_OUTBOUND_RULES,
       "blocked_connections": 0,
       "allowed_connections": 0
     },
@@ -204,7 +245,7 @@ cat << EOF
       "vendor": "Apple",
       "product_name": "XProtect",
       "version": "$XPROTECT_VERSION",
-      "signature_count": 0,
+      "signature_count": $XPROTECT_SIGNATURE_COUNT,
       "threats_detected_30d": 0,
       "quarantine_count": 0
     },
@@ -235,9 +276,9 @@ cat << EOF
       "disabled_accounts": 0
     },
     "services": {
-      "running_services": 0,
-      "stopped_services": 0,
-      "auto_start_services": 0,
+      "running_services": $RUNNING_SERVICES,
+      "stopped_services": $STOPPED_SERVICES,
+      "auto_start_services": $AUTO_START_SERVICES,
       "manual_start_services": 0,
       "disabled_services": 0,
       "suspicious_services": [],
@@ -429,4 +470,4 @@ cat << EOF
 }
 EOF
 
-echo -e "${GREEN}🎉 macOS Enhanced Collector tamamlandı!${NC}"
+# echo -e "${GREEN}🎉 macOS Enhanced Collector tamamlandı!${NC}"
