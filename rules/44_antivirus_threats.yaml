@@ -1,0 +1,21 @@
+rule:
+  id: "antivirus_threats"
+  name: "Antivirüs Tehdit Tespiti"
+  description: "Son 30 günde tespit edilen tehdit sayısını kontrol eder"
+  category: "malware_protection"
+  severity: "medium"
+  weight: 5
+  
+check:
+  field: "security.antivirus.threats_detected_30d"
+  operator: "less_than"
+  expected_value: 10
+  
+message:
+  pass: "Tehdit tespit sayısı normal"
+  fail: "Yüksek tehdit tespit sayısı - sistem taraması gerekli!"
+  
+remediation:
+  action: "full_system_scan"
+  script: "scripts/full_system_scan.ps1"
+  description: "Tam sistem taraması yap"

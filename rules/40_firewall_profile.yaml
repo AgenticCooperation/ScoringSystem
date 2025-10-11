@@ -1,0 +1,21 @@
+rule:
+  id: "firewall_profile"
+  name: "Firewall Profil Kontrolü"
+  description: "Firewall profilinin güvenli olup olmadığını kontrol eder"
+  category: "network_security"
+  severity: "medium"
+  weight: 6
+  
+check:
+  field: "security.firewall.profile"
+  operator: "not_equals"
+  expected_value: "Public"
+  
+message:
+  pass: "Firewall profili güvenli"
+  fail: "Firewall profili Public - güvenlik riski!"
+  
+remediation:
+  action: "change_firewall_profile"
+  script: "scripts/change_firewall_profile.ps1"
+  description: "Firewall profilini Private veya Domain olarak değiştir"

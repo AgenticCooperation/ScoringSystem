@@ -1,0 +1,21 @@
+rule:
+  id: "concurrent_sessions"
+  name: "Eşzamanlı Oturum Kontrolü"
+  description: "Eşzamanlı oturum sayısını kontrol eder"
+  category: "access_control"
+  severity: "medium"
+  weight: 5
+  
+check:
+  field: "security.session_management.concurrent_sessions"
+  operator: "less_than"
+  expected_value: 3
+  
+message:
+  pass: "Eşzamanlı oturum sayısı normal"
+  fail: "Çok fazla eşzamanlı oturum - güvenlik riski!"
+  
+remediation:
+  action: "limit_concurrent_sessions"
+  script: "scripts/limit_concurrent_sessions.ps1"
+  description: "Eşzamanlı oturum sayısını sınırla"

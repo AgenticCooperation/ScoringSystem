@@ -1,0 +1,21 @@
+rule:
+  id: "antivirus_status"
+  name: "Antivirüs Durum Kontrolü"
+  description: "Antivirüs yazılımının çalışır durumda olup olmadığını kontrol eder"
+  category: "malware_protection"
+  severity: "critical"
+  weight: 10
+  
+check:
+  field: "security.antivirus.status"
+  operator: "equals"
+  expected_value: "enabled"
+  
+message:
+  pass: "Antivirüs etkin ve çalışıyor"
+  fail: "Antivirüs devre dışı veya hata durumunda - kritik risk!"
+  
+remediation:
+  action: "fix_antivirus"
+  script: "scripts/fix_antivirus.ps1"
+  description: "Antivirüs yazılımını düzelt ve etkinleştir"

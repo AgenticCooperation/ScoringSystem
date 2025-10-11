@@ -1,0 +1,21 @@
+rule:
+  id: "secure_boot_enabled"
+  name: "Secure Boot Etkin Kontrolü"
+  description: "Secure Boot özelliğinin etkin olup olmadığını kontrol eder"
+  category: "system_security"
+  severity: "high"
+  weight: 9
+  
+check:
+  field: "system.hardware.secure_boot_enabled"
+  operator: "equals"
+  expected_value: true
+  
+message:
+  pass: "Secure Boot etkin durumda"
+  fail: "Secure Boot devre dışı - sistem güvenliği riski!"
+  
+remediation:
+  action: "enable_secure_boot"
+  script: "scripts/enable_secure_boot.ps1"
+  description: "Secure Boot'u etkinleştir"

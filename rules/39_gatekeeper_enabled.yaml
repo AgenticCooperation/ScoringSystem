@@ -1,0 +1,21 @@
+rule:
+  id: "gatekeeper_enabled"
+  name: "Gatekeeper Etkin Kontrolü (macOS)"
+  description: "Gatekeeper'ın etkin olup olmadığını kontrol eder"
+  category: "system_security"
+  severity: "medium"
+  weight: 7
+  
+check:
+  field: "system.hardware.gatekeeper_enabled"
+  operator: "equals"
+  expected_value: true
+  
+message:
+  pass: "Gatekeeper etkin durumda"
+  fail: "Gatekeeper devre dışı - uygulama güvenliği riski!"
+  
+remediation:
+  action: "enable_gatekeeper"
+  script: "scripts/enable_gatekeeper.sh"
+  description: "Gatekeeper'ı etkinleştir"

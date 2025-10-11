@@ -1,0 +1,21 @@
+rule:
+  id: "firewall_rules_count"
+  name: "Firewall Kural Sayısı Kontrolü"
+  description: "Firewall kural sayısının makul olup olmadığını kontrol eder"
+  category: "network_security"
+  severity: "low"
+  weight: 3
+  
+check:
+  field: "security.firewall.rules_count"
+  operator: "less_than"
+  expected_value: 100
+  
+message:
+  pass: "Firewall kural sayısı makul"
+  fail: "Çok fazla firewall kuralı - yönetim zorluğu!"
+  
+remediation:
+  action: "review_firewall_rules"
+  script: "scripts/review_firewall_rules.ps1"
+  description: "Firewall kurallarını gözden geçir ve temizle"

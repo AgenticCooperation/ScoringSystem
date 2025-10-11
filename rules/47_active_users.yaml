@@ -1,0 +1,21 @@
+rule:
+  id: "active_users"
+  name: "Aktif Kullanıcı Kontrolü"
+  description: "Son 30 günde aktif olan kullanıcı sayısını kontrol eder"
+  category: "access_control"
+  severity: "medium"
+  weight: 5
+  
+check:
+  field: "security.users.active_users_30d"
+  operator: "greater_than"
+  expected_value: 0
+  
+message:
+  pass: "Aktif kullanıcılar mevcut"
+  fail: "Hiç aktif kullanıcı yok - hesap yönetimi gerekli!"
+  
+remediation:
+  action: "review_inactive_accounts"
+  script: "scripts/review_inactive_accounts.ps1"
+  description: "Pasif hesapları gözden geçir"

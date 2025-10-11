@@ -1,0 +1,21 @@
+rule:
+  id: "mfa_bypass"
+  name: "MFA Bypass Hesap Kontrolü"
+  description: "MFA bypass eden hesap sayısını kontrol eder"
+  category: "access_control"
+  severity: "high"
+  weight: 8
+  
+check:
+  field: "security.mfa.bypass_accounts"
+  operator: "equals"
+  expected_value: 0
+  
+message:
+  pass: "MFA bypass hesabı yok"
+  fail: "MFA bypass eden hesaplar var - güvenlik riski!"
+  
+remediation:
+  action: "remove_mfa_bypass"
+  script: "scripts/remove_mfa_bypass.ps1"
+  description: "MFA bypass hesaplarını kaldır"

@@ -1,0 +1,21 @@
+rule:
+  id: "antivirus_realtime"
+  name: "Antivirüs Gerçek Zamanlı Koruma"
+  description: "Antivirüs gerçek zamanlı korumasının etkin olup olmadığını kontrol eder"
+  category: "malware_protection"
+  severity: "high"
+  weight: 9
+  
+check:
+  field: "security.antivirus.real_time_protection"
+  operator: "equals"
+  expected_value: true
+  
+message:
+  pass: "Gerçek zamanlı koruma etkin"
+  fail: "Gerçek zamanlı koruma devre dışı - güvenlik riski!"
+  
+remediation:
+  action: "enable_realtime_protection"
+  script: "scripts/enable_realtime_protection.ps1"
+  description: "Gerçek zamanlı korumayı etkinleştir"

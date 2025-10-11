@@ -1,0 +1,21 @@
+rule:
+  id: "sip_enabled"
+  name: "SIP Etkin Kontrolü (macOS)"
+  description: "System Integrity Protection'ın etkin olup olmadığını kontrol eder"
+  category: "system_security"
+  severity: "high"
+  weight: 9
+  
+check:
+  field: "system.hardware.sip_enabled"
+  operator: "equals"
+  expected_value: true
+  
+message:
+  pass: "SIP etkin durumda"
+  fail: "SIP devre dışı - macOS güvenliği riski!"
+  
+remediation:
+  action: "enable_sip"
+  script: "scripts/enable_sip.sh"
+  description: "SIP'yi etkinleştir"

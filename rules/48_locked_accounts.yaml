@@ -1,0 +1,21 @@
+rule:
+  id: "locked_accounts"
+  name: "Kilitli Hesap Kontrolü"
+  description: "Kilitli hesap sayısını kontrol eder"
+  category: "access_control"
+  severity: "medium"
+  weight: 4
+  
+check:
+  field: "security.users.locked_accounts"
+  operator: "less_than"
+  expected_value: 5
+  
+message:
+  pass: "Kilitli hesap sayısı normal"
+  fail: "Çok fazla kilitli hesap - güvenlik olayı olabilir!"
+  
+remediation:
+  action: "review_locked_accounts"
+  script: "scripts/review_locked_accounts.ps1"
+  description: "Kilitli hesapları gözden geçir"

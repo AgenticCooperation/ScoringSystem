@@ -1,0 +1,21 @@
+rule:
+  id: "auto_update_enabled"
+  name: "Otomatik Güncelleme Kontrolü"
+  description: "Otomatik güncelleme özelliğinin etkin olup olmadığını kontrol eder"
+  category: "patch_management"
+  severity: "high"
+  weight: 8
+  
+check:
+  field: "security.updates.auto_update_enabled"
+  operator: "equals"
+  expected_value: true
+  
+message:
+  pass: "Otomatik güncelleme etkin"
+  fail: "Otomatik güncelleme devre dışı - güvenlik riski!"
+  
+remediation:
+  action: "enable_auto_update"
+  script: "scripts/enable_auto_update.ps1"
+  description: "Otomatik güncellemeyi etkinleştir"

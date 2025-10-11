@@ -1,0 +1,21 @@
+rule:
+  id: "total_users"
+  name: "Toplam Kullanıcı Sayısı Kontrolü"
+  description: "Sistemdeki toplam kullanıcı sayısının makul olup olmadığını kontrol eder"
+  category: "access_control"
+  severity: "low"
+  weight: 3
+  
+check:
+  field: "security.users.total_users"
+  operator: "less_than"
+  expected_value: 50
+  
+message:
+  pass: "Kullanıcı sayısı makul"
+  fail: "Çok fazla kullanıcı hesabı - yönetim zorluğu!"
+  
+remediation:
+  action: "review_user_accounts"
+  script: "scripts/review_user_accounts.ps1"
+  description: "Kullanıcı hesaplarını gözden geçir ve gereksizleri kaldır"

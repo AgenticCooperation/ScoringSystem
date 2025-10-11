@@ -1,0 +1,21 @@
+rule:
+  id: "disabled_accounts"
+  name: "Devre Dışı Hesap Kontrolü"
+  description: "Devre dışı hesap sayısını kontrol eder"
+  category: "access_control"
+  severity: "low"
+  weight: 2
+  
+check:
+  field: "security.users.disabled_accounts"
+  operator: "less_than"
+  expected_value: 10
+  
+message:
+  pass: "Devre dışı hesap sayısı normal"
+  fail: "Çok fazla devre dışı hesap - temizlik gerekli!"
+  
+remediation:
+  action: "cleanup_disabled_accounts"
+  script: "scripts/cleanup_disabled_accounts.ps1"
+  description: "Devre dışı hesapları temizle"

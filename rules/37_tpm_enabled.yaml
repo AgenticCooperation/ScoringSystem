@@ -1,0 +1,21 @@
+rule:
+  id: "tpm_enabled"
+  name: "TPM Etkin Kontrolü"
+  description: "Trusted Platform Module'ün etkin olup olmadığını kontrol eder"
+  category: "system_security"
+  severity: "high"
+  weight: 8
+  
+check:
+  field: "system.hardware.tpm_enabled"
+  operator: "equals"
+  expected_value: true
+  
+message:
+  pass: "TPM etkin durumda"
+  fail: "TPM devre dışı - donanım güvenliği riski!"
+  
+remediation:
+  action: "enable_tpm"
+  script: "scripts/enable_tpm.ps1"
+  description: "TPM'yi etkinleştir"
