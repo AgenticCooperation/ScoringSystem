@@ -1,0 +1,21 @@
+rule:
+  id: "high_privilege_services"
+  name: "Yüksek Ayrıcalıklı Servisler"
+  description: "Yüksek ayrıcalıklı servis sayısını kontrol eder"
+  category: "security_monitoring"
+  severity: "medium"
+  weight: 6
+  
+check:
+  field: "security.services.high_privilege_services"
+  operator: "array_length"
+  expected_value: 5
+  
+message:
+  pass: "Yüksek ayrıcalıklı servis sayısı normal"
+  fail: "Çok fazla yüksek ayrıcalıklı servis - güvenlik riski!"
+  
+remediation:
+  action: "review_high_privilege_services"
+  script: "scripts/review_high_privilege_services.ps1"
+  description: "Yüksek ayrıcalıklı servisleri gözden geçir"

@@ -1,0 +1,21 @@
+rule:
+  id: "suspicious_processes"
+  name: "Şüpheli Prosesler"
+  description: "Şüpheli proses sayısını kontrol eder"
+  category: "security_monitoring"
+  severity: "critical"
+  weight: 10
+  
+check:
+  field: "security.processes.suspicious_processes"
+  operator: "array_length"
+  expected_value: 0
+  
+message:
+  pass: "Şüpheli proses yok"
+  fail: "Şüpheli prosesler tespit edildi - kritik güvenlik riski!"
+  
+remediation:
+  action: "investigate_suspicious_processes"
+  script: "scripts/investigate_suspicious_processes.ps1"
+  description: "Şüpheli prosesleri araştır"

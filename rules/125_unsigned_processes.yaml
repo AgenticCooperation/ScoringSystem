@@ -1,0 +1,21 @@
+rule:
+  id: "unsigned_processes"
+  name: "İmzasız Prosesler"
+  description: "İmzasız proses sayısını kontrol eder"
+  category: "security_monitoring"
+  severity: "high"
+  weight: 8
+  
+check:
+  field: "security.processes.unsigned_processes"
+  operator: "array_length"
+  expected_value: 0
+  
+message:
+  pass: "İmzasız proses yok"
+  fail: "İmzasız prosesler var - güvenlik riski!"
+  
+remediation:
+  action: "investigate_unsigned_processes"
+  script: "scripts/investigate_unsigned_processes.ps1"
+  description: "İmzasız prosesleri araştır"

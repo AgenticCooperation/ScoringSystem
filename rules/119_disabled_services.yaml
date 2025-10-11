@@ -1,0 +1,21 @@
+rule:
+  id: "disabled_services"
+  name: "Devre Dışı Servisler"
+  description: "Devre dışı servis sayısını kontrol eder"
+  category: "system_management"
+  severity: "low"
+  weight: 2
+  
+check:
+  field: "security.services.disabled_services"
+  operator: "less_than"
+  expected_value: 30
+  
+message:
+  pass: "Devre dışı servis sayısı normal"
+  fail: "Çok fazla devre dışı servis - temizlik gerekli!"
+  
+remediation:
+  action: "cleanup_disabled_services"
+  script: "scripts/cleanup_disabled_services.ps1"
+  description: "Devre dışı servisleri temizle"

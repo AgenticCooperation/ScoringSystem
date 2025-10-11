@@ -1,0 +1,21 @@
+rule:
+  id: "dns_over_https"
+  name: "DNS over HTTPS"
+  description: "DNS over HTTPS özelliğinin etkin olup olmadığını kontrol eder"
+  category: "network_security"
+  severity: "medium"
+  weight: 6
+  
+check:
+  field: "network.dns.dns_over_https"
+  operator: "equals"
+  expected_value: true
+  
+message:
+  pass: "DNS over HTTPS etkin"
+  fail: "DNS over HTTPS devre dışı - DNS güvenliği zayıf!"
+  
+remediation:
+  action: "enable_dns_over_https"
+  script: "scripts/enable_dns_over_https.ps1"
+  description: "DNS over HTTPS'yi etkinleştir"

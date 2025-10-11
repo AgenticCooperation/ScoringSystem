@@ -1,0 +1,21 @@
+rule:
+  id: "bitlocker_status"
+  name: "BitLocker Durum Kontrolü"
+  description: "BitLocker şifreleme durumunu kontrol eder"
+  category: "encryption"
+  severity: "high"
+  weight: 9
+  
+check:
+  field: "compliance.encryption.bitlocker_status"
+  operator: "equals"
+  expected_value: "FullyEncrypted"
+  
+message:
+  pass: "BitLocker tam şifreli"
+  fail: "BitLocker tam şifreli değil - şifreleme eksikliği!"
+  
+remediation:
+  action: "complete_bitlocker_encryption"
+  script: "scripts/complete_bitlocker_encryption.ps1"
+  description: "BitLocker şifrelemesini tamamla"

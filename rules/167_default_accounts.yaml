@@ -1,0 +1,21 @@
+rule:
+  id: "default_accounts"
+  name: "Varsayılan Hesaplar"
+  description: "Varsayılan hesapların devre dışı olup olmadığını kontrol eder"
+  category: "config_hygiene"
+  severity: "high"
+  weight: 8
+  
+check:
+  field: "config_hygiene.default_accounts"
+  operator: "equals"
+  expected_value: false
+  
+message:
+  pass: "Varsayılan hesaplar devre dışı"
+  fail: "Varsayılan hesaplar aktif - güvenlik riski!"
+  
+remediation:
+  action: "disable_default_accounts"
+  script: "scripts/disable_default_accounts.ps1"
+  description: "Varsayılan hesapları devre dışı bırak"

@@ -1,0 +1,21 @@
+rule:
+  id: "encryption_algorithm"
+  name: "Şifreleme Algoritması"
+  description: "Şifreleme algoritmasının güvenli olup olmadığını kontrol eder"
+  category: "encryption"
+  severity: "high"
+  weight: 8
+  
+check:
+  field: "compliance.encryption.encryption_algorithm"
+  operator: "not_equals"
+  expected_value: "DES"
+  
+message:
+  pass: "Şifreleme algoritması güvenli"
+  fail: "Şifreleme algoritması güvenli değil - güvenlik riski!"
+  
+remediation:
+  action: "upgrade_encryption_algorithm"
+  script: "scripts/upgrade_encryption_algorithm.ps1"
+  description: "Şifreleme algoritmasını yükselt"

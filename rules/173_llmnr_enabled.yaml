@@ -1,0 +1,21 @@
+rule:
+  id: "llmnr_enabled"
+  name: "LLMNR Protokolü"
+  description: "LLMNR protokolünün devre dışı olup olmadığını kontrol eder"
+  category: "config_hygiene"
+  severity: "high"
+  weight: 8
+  
+check:
+  field: "config_hygiene.llmnr_enabled"
+  operator: "equals"
+  expected_value: false
+  
+message:
+  pass: "LLMNR protokolü devre dışı"
+  fail: "LLMNR protokolü aktif - güvenlik riski!"
+  
+remediation:
+  action: "disable_llmnr"
+  script: "scripts/disable_llmnr.ps1"
+  description: "LLMNR protokolünü devre dışı bırak"

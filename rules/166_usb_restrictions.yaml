@@ -1,0 +1,21 @@
+rule:
+  id: "usb_restrictions"
+  name: "USB Kısıtlamaları"
+  description: "USB kısıtlamalarının etkin olup olmadığını kontrol eder"
+  category: "access_control"
+  severity: "medium"
+  weight: 6
+  
+check:
+  field: "compliance.policies.usb_restrictions"
+  operator: "equals"
+  expected_value: true
+  
+message:
+  pass: "USB kısıtlamaları etkin"
+  fail: "USB kısıtlamaları devre dışı - veri sızıntısı riski!"
+  
+remediation:
+  action: "enable_usb_restrictions"
+  script: "scripts/enable_usb_restrictions.ps1"
+  description: "USB kısıtlamalarını etkinleştir"

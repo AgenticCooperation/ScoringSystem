@@ -1,0 +1,21 @@
+rule:
+  id: "ioc_matches"
+  name: "IOC Eşleşmeleri"
+  description: "IOC eşleşme sayısını kontrol eder"
+  category: "threat_detection"
+  severity: "high"
+  weight: 8
+  
+check:
+  field: "security.threat_detection.ioc_matches"
+  operator: "less_than"
+  expected_value: 10
+  
+message:
+  pass: "IOC eşleşme sayısı normal"
+  fail: "Yüksek IOC eşleşme sayısı - güvenlik olayı riski!"
+  
+remediation:
+  action: "investigate_ioc_matches"
+  script: "scripts/investigate_ioc_matches.ps1"
+  description: "IOC eşleşmelerini araştır"

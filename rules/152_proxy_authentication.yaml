@@ -1,0 +1,21 @@
+rule:
+  id: "proxy_authentication"
+  name: "Proxy Kimlik Doğrulama"
+  description: "Proxy kimlik doğrulamasının gerekli olup olmadığını kontrol eder"
+  category: "network_security"
+  severity: "medium"
+  weight: 6
+  
+check:
+  field: "network.proxy.authentication_required"
+  operator: "equals"
+  expected_value: true
+  
+message:
+  pass: "Proxy kimlik doğrulama gerekli"
+  fail: "Proxy kimlik doğrulama gerekli değil - güvenlik riski!"
+  
+remediation:
+  action: "enable_proxy_authentication"
+  script: "scripts/enable_proxy_authentication.ps1"
+  description: "Proxy kimlik doğrulamasını etkinleştir"

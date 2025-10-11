@@ -1,0 +1,21 @@
+rule:
+  id: "recent_modified_files"
+  name: "Son Değiştirilen Dosyalar"
+  description: "Son değiştirilen dosya sayısını kontrol eder"
+  category: "security_monitoring"
+  severity: "medium"
+  weight: 5
+  
+check:
+  field: "security.files.recent_modified_files"
+  operator: "array_length"
+  expected_value: 50
+  
+message:
+  pass: "Son değiştirilen dosya sayısı normal"
+  fail: "Çok fazla son değiştirilen dosya - şüpheli aktivite riski!"
+  
+remediation:
+  action: "investigate_recent_modified_files"
+  script: "scripts/investigate_recent_modified_files.ps1"
+  description: "Son değiştirilen dosyaları araştır"

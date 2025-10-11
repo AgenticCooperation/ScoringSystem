@@ -1,0 +1,21 @@
+rule:
+  id: "suspicious_ips"
+  name: "Şüpheli IP Adresleri"
+  description: "Şüpheli IP adresi sayısını kontrol eder"
+  category: "threat_intelligence"
+  severity: "high"
+  weight: 8
+  
+check:
+  field: "threat_intelligence.suspicious_ips"
+  operator: "array_length"
+  expected_value: 0
+  
+message:
+  pass: "Şüpheli IP adresi yok"
+  fail: "Şüpheli IP adresleri tespit edildi - güvenlik riski!"
+  
+remediation:
+  action: "investigate_suspicious_ips"
+  script: "scripts/investigate_suspicious_ips.ps1"
+  description: "Şüpheli IP adreslerini araştır"

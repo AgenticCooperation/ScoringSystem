@@ -1,0 +1,21 @@
+rule:
+  id: "local_policies_count"
+  name: "Yerel Politika Sayısı"
+  description: "Yerel politika sayısını kontrol eder"
+  category: "policy_management"
+  severity: "low"
+  weight: 3
+  
+check:
+  field: "compliance.policies.local_policies_count"
+  operator: "less_than"
+  expected_value: 20
+  
+message:
+  pass: "Yerel politika sayısı normal"
+  fail: "Çok fazla yerel politika - yönetim zorluğu!"
+  
+remediation:
+  action: "review_local_policies"
+  script: "scripts/review_local_policies.ps1"
+  description: "Yerel politikaları gözden geçir"

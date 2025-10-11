@@ -1,0 +1,21 @@
+rule:
+  id: "disabled_security_features"
+  name: "Devre Dışı Güvenlik Özellikleri"
+  description: "Devre dışı güvenlik özelliği sayısını kontrol eder"
+  category: "security_monitoring"
+  severity: "critical"
+  weight: 10
+  
+check:
+  field: "security.registry.disabled_security_features"
+  operator: "array_length"
+  expected_value: 0
+  
+message:
+  pass: "Devre dışı güvenlik özelliği yok"
+  fail: "Devre dışı güvenlik özellikleri tespit edildi - kritik güvenlik riski!"
+  
+remediation:
+  action: "investigate_disabled_security_features"
+  script: "scripts/investigate_disabled_security_features.ps1"
+  description: "Devre dışı güvenlik özelliklerini araştır"

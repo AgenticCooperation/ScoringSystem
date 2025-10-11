@@ -1,0 +1,21 @@
+rule:
+  id: "telnet_enabled"
+  name: "Telnet Protokolü"
+  description: "Telnet protokolünün devre dışı olup olmadığını kontrol eder"
+  category: "config_hygiene"
+  severity: "critical"
+  weight: 10
+  
+check:
+  field: "config_hygiene.telnet_enabled"
+  operator: "equals"
+  expected_value: false
+  
+message:
+  pass: "Telnet protokolü devre dışı"
+  fail: "Telnet protokolü aktif - kritik güvenlik riski!"
+  
+remediation:
+  action: "disable_telnet"
+  script: "scripts/disable_telnet.ps1"
+  description: "Telnet protokolünü devre dışı bırak"

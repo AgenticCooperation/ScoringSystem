@@ -1,0 +1,21 @@
+rule:
+  id: "privileged_processes"
+  name: "Ayrıcalıklı Prosesler"
+  description: "Ayrıcalıklı proses sayısını kontrol eder"
+  category: "security_monitoring"
+  severity: "high"
+  weight: 8
+  
+check:
+  field: "security.processes.privileged_processes"
+  operator: "array_length"
+  expected_value: 5
+  
+message:
+  pass: "Ayrıcalıklı proses sayısı normal"
+  fail: "Çok fazla ayrıcalıklı proses - güvenlik riski!"
+  
+remediation:
+  action: "review_privileged_processes"
+  script: "scripts/review_privileged_processes.ps1"
+  description: "Ayrıcalıklı prosesleri gözden geçir"

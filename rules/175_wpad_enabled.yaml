@@ -1,0 +1,21 @@
+rule:
+  id: "wpad_enabled"
+  name: "WPAD Protokolü"
+  description: "WPAD protokolünün devre dışı olup olmadığını kontrol eder"
+  category: "config_hygiene"
+  severity: "high"
+  weight: 8
+  
+check:
+  field: "config_hygiene.wpad_enabled"
+  operator: "equals"
+  expected_value: false
+  
+message:
+  pass: "WPAD protokolü devre dışı"
+  fail: "WPAD protokolü aktif - güvenlik riski!"
+  
+remediation:
+  action: "disable_wpad"
+  script: "scripts/disable_wpad.ps1"
+  description: "WPAD protokolünü devre dışı bırak"

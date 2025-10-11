@@ -1,0 +1,21 @@
+rule:
+  id: "auto_run_disabled"
+  name: "Otomatik Çalıştırma"
+  description: "Otomatik çalıştırmanın devre dışı olup olmadığını kontrol eder"
+  category: "config_hygiene"
+  severity: "high"
+  weight: 8
+  
+check:
+  field: "config_hygiene.auto_run_disabled"
+  operator: "equals"
+  expected_value: true
+  
+message:
+  pass: "Otomatik çalıştırma devre dışı"
+  fail: "Otomatik çalıştırma aktif - güvenlik riski!"
+  
+remediation:
+  action: "disable_auto_run"
+  script: "scripts/disable_auto_run.ps1"
+  description: "Otomatik çalıştırmayı devre dışı bırak"

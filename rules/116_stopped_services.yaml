@@ -1,0 +1,21 @@
+rule:
+  id: "stopped_services"
+  name: "Durdurulmuş Servisler"
+  description: "Durdurulmuş servis sayısını kontrol eder"
+  category: "system_management"
+  severity: "low"
+  weight: 2
+  
+check:
+  field: "security.services.stopped_services"
+  operator: "less_than"
+  expected_value: 50
+  
+message:
+  pass: "Durdurulmuş servis sayısı normal"
+  fail: "Çok fazla durdurulmuş servis - temizlik gerekli!"
+  
+remediation:
+  action: "cleanup_stopped_services"
+  script: "scripts/cleanup_stopped_services.ps1"
+  description: "Durdurulmuş servisleri temizle"

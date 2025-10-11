@@ -1,0 +1,21 @@
+rule:
+  id: "network_services"
+  name: "Ağ Servisleri"
+  description: "Ağ servis sayısını kontrol eder"
+  category: "network_security"
+  severity: "medium"
+  weight: 5
+  
+check:
+  field: "security.services.network_services"
+  operator: "array_length"
+  expected_value: 10
+  
+message:
+  pass: "Ağ servis sayısı normal"
+  fail: "Çok fazla ağ servisi - ağ güvenliği riski!"
+  
+remediation:
+  action: "review_network_services"
+  script: "scripts/review_network_services.ps1"
+  description: "Ağ servislerini gözden geçir"

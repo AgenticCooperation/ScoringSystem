@@ -1,0 +1,21 @@
+rule:
+  id: "running_apps_count"
+  name: "Çalışan Uygulama Sayısı"
+  description: "Çalışan uygulama sayısını kontrol eder"
+  category: "application_management"
+  severity: "low"
+  weight: 2
+  
+check:
+  field: "applications.running_apps"
+  operator: "array_length"
+  expected_value: 20
+  
+message:
+  pass: "Çalışan uygulama sayısı normal"
+  fail: "Çok fazla çalışan uygulama - performans riski!"
+  
+remediation:
+  action: "review_running_apps"
+  script: "scripts/review_running_apps.ps1"
+  description: "Çalışan uygulamaları gözden geçir"

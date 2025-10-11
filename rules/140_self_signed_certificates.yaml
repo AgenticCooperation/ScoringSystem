@@ -1,0 +1,21 @@
+rule:
+  id: "self_signed_certificates"
+  name: "Kendi Kendine İmzalı Sertifikalar"
+  description: "Kendi kendine imzalı sertifika sayısını kontrol eder"
+  category: "certificate_management"
+  severity: "medium"
+  weight: 6
+  
+check:
+  field: "security.certificates.self_signed_certificates"
+  operator: "less_than"
+  expected_value: 3
+  
+message:
+  pass: "Kendi kendine imzalı sertifika sayısı normal"
+  fail: "Çok fazla kendi kendine imzalı sertifika - güvenlik riski!"
+  
+remediation:
+  action: "review_self_signed_certificates"
+  script: "scripts/review_self_signed_certificates.ps1"
+  description: "Kendi kendine imzalı sertifikaları gözden geçir"

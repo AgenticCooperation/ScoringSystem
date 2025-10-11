@@ -1,0 +1,21 @@
+rule:
+  id: "residual_risk"
+  name: "Kalan Risk"
+  description: "Kalan risk seviyesini kontrol eder"
+  category: "risk_management"
+  severity: "high"
+  weight: 8
+  
+check:
+  field: "security.risk_assessment.residual_risk"
+  operator: "less_than"
+  expected_value: 30
+  
+message:
+  pass: "Kalan risk kabul edilebilir"
+  fail: "Kalan risk yüksek - ek kontroller gerekli!"
+  
+remediation:
+  action: "reduce_residual_risk"
+  script: "scripts/reduce_residual_risk.ps1"
+  description: "Kalan riski azalt"

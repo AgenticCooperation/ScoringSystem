@@ -1,0 +1,21 @@
+rule:
+  id: "unsigned_executables"
+  name: "İmzasız Çalıştırılabilir Dosyalar"
+  description: "İmzasız çalıştırılabilir dosya sayısını kontrol eder"
+  category: "security_monitoring"
+  severity: "high"
+  weight: 8
+  
+check:
+  field: "security.files.unsigned_executables"
+  operator: "array_length"
+  expected_value: 0
+  
+message:
+  pass: "İmzasız çalıştırılabilir dosya yok"
+  fail: "İmzasız çalıştırılabilir dosyalar var - güvenlik riski!"
+  
+remediation:
+  action: "investigate_unsigned_executables"
+  script: "scripts/investigate_unsigned_executables.ps1"
+  description: "İmzasız çalıştırılabilir dosyaları araştır"

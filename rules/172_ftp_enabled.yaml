@@ -1,0 +1,21 @@
+rule:
+  id: "ftp_enabled"
+  name: "FTP Protokolü"
+  description: "FTP protokolünün devre dışı olup olmadığını kontrol eder"
+  category: "config_hygiene"
+  severity: "critical"
+  weight: 10
+  
+check:
+  field: "config_hygiene.ftp_enabled"
+  operator: "equals"
+  expected_value: false
+  
+message:
+  pass: "FTP protokolü devre dışı"
+  fail: "FTP protokolü aktif - kritik güvenlik riski!"
+  
+remediation:
+  action: "disable_ftp"
+  script: "scripts/disable_ftp.ps1"
+  description: "FTP protokolünü devre dışı bırak"

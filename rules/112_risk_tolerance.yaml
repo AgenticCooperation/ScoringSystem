@@ -1,0 +1,21 @@
+rule:
+  id: "risk_tolerance"
+  name: "Risk Toleransı"
+  description: "Risk toleransının uygun olup olmadığını kontrol eder"
+  category: "risk_management"
+  severity: "medium"
+  weight: 6
+  
+check:
+  field: "security.risk_assessment.risk_tolerance"
+  operator: "not_equals"
+  expected_value: "High"
+  
+message:
+  pass: "Risk toleransı uygun"
+  fail: "Risk toleransı yüksek - güvenlik riski!"
+  
+remediation:
+  action: "review_risk_tolerance"
+  script: "scripts/review_risk_tolerance.ps1"
+  description: "Risk toleransını gözden geçir"

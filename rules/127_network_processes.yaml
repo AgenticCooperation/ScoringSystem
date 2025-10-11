@@ -1,0 +1,21 @@
+rule:
+  id: "network_processes"
+  name: "Ağ Prosesleri"
+  description: "Ağ proses sayısını kontrol eder"
+  category: "network_security"
+  severity: "medium"
+  weight: 5
+  
+check:
+  field: "security.processes.network_processes"
+  operator: "array_length"
+  expected_value: 10
+  
+message:
+  pass: "Ağ proses sayısı normal"
+  fail: "Çok fazla ağ prosesi - ağ güvenliği riski!"
+  
+remediation:
+  action: "review_network_processes"
+  script: "scripts/review_network_processes.ps1"
+  description: "Ağ proseslerini gözden geçir"

@@ -1,0 +1,21 @@
+rule:
+  id: "geolocation_anomalies"
+  name: "Coğrafi Konum Anomalileri"
+  description: "Coğrafi konum anomali sayısını kontrol eder"
+  category: "threat_intelligence"
+  severity: "medium"
+  weight: 6
+  
+check:
+  field: "threat_intelligence.geolocation_anomalies"
+  operator: "array_length"
+  expected_value: 0
+  
+message:
+  pass: "Coğrafi konum anomalisi yok"
+  fail: "Coğrafi konum anomalileri tespit edildi - şüpheli aktivite!"
+  
+remediation:
+  action: "investigate_geolocation_anomalies"
+  script: "scripts/investigate_geolocation_anomalies.ps1"
+  description: "Coğrafi konum anomalilerini araştır"

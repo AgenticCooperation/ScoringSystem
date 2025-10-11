@@ -1,0 +1,21 @@
+rule:
+  id: "netbios_enabled"
+  name: "NetBIOS Protokolü"
+  description: "NetBIOS protokolünün devre dışı olup olmadığını kontrol eder"
+  category: "config_hygiene"
+  severity: "high"
+  weight: 8
+  
+check:
+  field: "config_hygiene.netbios_enabled"
+  operator: "equals"
+  expected_value: false
+  
+message:
+  pass: "NetBIOS protokolü devre dışı"
+  fail: "NetBIOS protokolü aktif - güvenlik riski!"
+  
+remediation:
+  action: "disable_netbios"
+  script: "scripts/disable_netbios.ps1"
+  description: "NetBIOS protokolünü devre dışı bırak"

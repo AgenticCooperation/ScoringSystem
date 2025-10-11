@@ -1,0 +1,21 @@
+rule:
+  id: "listening_services"
+  name: "Dinleyen Servisler"
+  description: "Dinleyen servis sayısını kontrol eder"
+  category: "network_security"
+  severity: "medium"
+  weight: 6
+  
+check:
+  field: "network.connections.listening_services"
+  operator: "array_length"
+  expected_value: 10
+  
+message:
+  pass: "Dinleyen servis sayısı normal"
+  fail: "Çok fazla dinleyen servis - ağ güvenliği riski!"
+  
+remediation:
+  action: "review_listening_services"
+  script: "scripts/review_listening_services.ps1"
+  description: "Dinleyen servisleri gözden geçir"

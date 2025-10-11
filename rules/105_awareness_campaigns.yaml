@@ -1,0 +1,21 @@
+rule:
+  id: "awareness_campaigns"
+  name: "Farkındalık Kampanyaları"
+  description: "Farkındalık kampanya sayısını kontrol eder"
+  category: "security_training"
+  severity: "low"
+  weight: 3
+  
+check:
+  field: "security.security_training.awareness_campaigns"
+  operator: "greater_than"
+  expected_value: 0
+  
+message:
+  pass: "Farkındalık kampanyaları mevcut"
+  fail: "Farkındalık kampanyası yok - eğitim eksikliği!"
+  
+remediation:
+  action: "create_awareness_campaigns"
+  script: "scripts/create_awareness_campaigns.ps1"
+  description: "Farkındalık kampanyaları oluştur"

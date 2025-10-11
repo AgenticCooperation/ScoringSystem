@@ -1,0 +1,21 @@
+rule:
+  id: "malicious_domains"
+  name: "Kötü Amaçlı Domainler"
+  description: "Kötü amaçlı domain sayısını kontrol eder"
+  category: "threat_intelligence"
+  severity: "high"
+  weight: 8
+  
+check:
+  field: "threat_intelligence.malicious_domains"
+  operator: "array_length"
+  expected_value: 0
+  
+message:
+  pass: "Kötü amaçlı domain yok"
+  fail: "Kötü amaçlı domainler tespit edildi - güvenlik riski!"
+  
+remediation:
+  action: "investigate_malicious_domains"
+  script: "scripts/investigate_malicious_domains.ps1"
+  description: "Kötü amaçlı domainleri araştır"

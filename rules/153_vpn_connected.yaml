@@ -1,0 +1,21 @@
+rule:
+  id: "vpn_connected"
+  name: "VPN Bağlantı Kontrolü"
+  description: "VPN bağlantısının aktif olup olmadığını kontrol eder"
+  category: "network_security"
+  severity: "medium"
+  weight: 6
+  
+check:
+  field: "network.vpn.connected"
+  operator: "equals"
+  expected_value: true
+  
+message:
+  pass: "VPN bağlantısı aktif"
+  fail: "VPN bağlantısı devre dışı - ağ güvenliği riski!"
+  
+remediation:
+  action: "connect_vpn"
+  script: "scripts/connect_vpn.ps1"
+  description: "VPN bağlantısını etkinleştir"

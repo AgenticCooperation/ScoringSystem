@@ -1,0 +1,21 @@
+rule:
+  id: "large_files_count"
+  name: "Büyük Dosya Sayısı"
+  description: "Büyük dosya sayısını kontrol eder"
+  category: "system_management"
+  severity: "low"
+  weight: 2
+  
+check:
+  field: "security.files.large_files_count"
+  operator: "less_than"
+  expected_value: 100
+  
+message:
+  pass: "Büyük dosya sayısı normal"
+  fail: "Çok fazla büyük dosya - disk alanı riski!"
+  
+remediation:
+  action: "review_large_files"
+  script: "scripts/review_large_files.ps1"
+  description: "Büyük dosyaları gözden geçir"

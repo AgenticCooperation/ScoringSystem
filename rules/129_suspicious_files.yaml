@@ -1,0 +1,21 @@
+rule:
+  id: "suspicious_files"
+  name: "Şüpheli Dosyalar"
+  description: "Şüpheli dosya sayısını kontrol eder"
+  category: "security_monitoring"
+  severity: "critical"
+  weight: 10
+  
+check:
+  field: "security.files.suspicious_files"
+  operator: "array_length"
+  expected_value: 0
+  
+message:
+  pass: "Şüpheli dosya yok"
+  fail: "Şüpheli dosyalar tespit edildi - kritik güvenlik riski!"
+  
+remediation:
+  action: "investigate_suspicious_files"
+  script: "scripts/investigate_suspicious_files.ps1"
+  description: "Şüpheli dosyaları araştır"

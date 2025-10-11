@@ -1,0 +1,21 @@
+rule:
+  id: "tor_usage"
+  name: "TOR Kullanımı"
+  description: "TOR kullanımının tespit edilip edilmediğini kontrol eder"
+  category: "threat_intelligence"
+  severity: "high"
+  weight: 8
+  
+check:
+  field: "threat_intelligence.tor_usage"
+  operator: "equals"
+  expected_value: false
+  
+message:
+  pass: "TOR kullanımı tespit edilmedi"
+  fail: "TOR kullanımı tespit edildi - güvenlik riski!"
+  
+remediation:
+  action: "investigate_tor_usage"
+  script: "scripts/investigate_tor_usage.ps1"
+  description: "TOR kullanımını araştır"

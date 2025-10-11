@@ -1,0 +1,21 @@
+rule:
+  id: "anonymous_sharing"
+  name: "Anonim Paylaşım"
+  description: "Anonim paylaşımın devre dışı olup olmadığını kontrol eder"
+  category: "config_hygiene"
+  severity: "high"
+  weight: 8
+  
+check:
+  field: "config_hygiene.anonymous_sharing"
+  operator: "equals"
+  expected_value: false
+  
+message:
+  pass: "Anonim paylaşım devre dışı"
+  fail: "Anonim paylaşım aktif - kritik güvenlik riski!"
+  
+remediation:
+  action: "disable_anonymous_sharing"
+  script: "scripts/disable_anonymous_sharing.ps1"
+  description: "Anonim paylaşımı devre dışı bırak"

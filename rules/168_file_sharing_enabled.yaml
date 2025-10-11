@@ -1,0 +1,21 @@
+rule:
+  id: "file_sharing_enabled"
+  name: "Dosya Paylaşımı"
+  description: "Dosya paylaşımının devre dışı olup olmadığını kontrol eder"
+  category: "config_hygiene"
+  severity: "medium"
+  weight: 6
+  
+check:
+  field: "config_hygiene.file_sharing_enabled"
+  operator: "equals"
+  expected_value: false
+  
+message:
+  pass: "Dosya paylaşımı devre dışı"
+  fail: "Dosya paylaşımı aktif - güvenlik riski!"
+  
+remediation:
+  action: "disable_file_sharing"
+  script: "scripts/disable_file_sharing.ps1"
+  description: "Dosya paylaşımını devre dışı bırak"

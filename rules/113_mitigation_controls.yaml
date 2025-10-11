@@ -1,0 +1,21 @@
+rule:
+  id: "mitigation_controls"
+  name: "Azaltma Kontrolleri"
+  description: "Azaltma kontrol sayısını kontrol eder"
+  category: "risk_management"
+  severity: "medium"
+  weight: 5
+  
+check:
+  field: "security.risk_assessment.mitigation_controls"
+  operator: "greater_than"
+  expected_value: 10
+  
+message:
+  pass: "Azaltma kontrolleri yeterli"
+  fail: "Azaltma kontrolleri yetersiz - risk yönetimi eksik!"
+  
+remediation:
+  action: "implement_mitigation_controls"
+  script: "scripts/implement_mitigation_controls.ps1"
+  description: "Azaltma kontrollerini uygula"

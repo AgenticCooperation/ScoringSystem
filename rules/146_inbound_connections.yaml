@@ -1,0 +1,21 @@
+rule:
+  id: "inbound_connections"
+  name: "Gelen Bağlantılar"
+  description: "Gelen bağlantı sayısını kontrol eder"
+  category: "network_security"
+  severity: "medium"
+  weight: 6
+  
+check:
+  field: "network.connections.inbound_connections"
+  operator: "less_than"
+  expected_value: 50
+  
+message:
+  pass: "Gelen bağlantı sayısı normal"
+  fail: "Çok fazla gelen bağlantı - ağ güvenliği riski!"
+  
+remediation:
+  action: "review_inbound_connections"
+  script: "scripts/review_inbound_connections.ps1"
+  description: "Gelen bağlantıları gözden geçir"

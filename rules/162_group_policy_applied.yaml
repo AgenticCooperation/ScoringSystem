@@ -1,0 +1,21 @@
+rule:
+  id: "group_policy_applied"
+  name: "Grup Politikası Uygulanması"
+  description: "Grup politikasının uygulanıp uygulanmadığını kontrol eder"
+  category: "policy_management"
+  severity: "high"
+  weight: 8
+  
+check:
+  field: "compliance.policies.group_policy_applied"
+  operator: "equals"
+  expected_value: true
+  
+message:
+  pass: "Grup politikası uygulanıyor"
+  fail: "Grup politikası uygulanmıyor - merkezi yönetim eksik!"
+  
+remediation:
+  action: "apply_group_policy"
+  script: "scripts/apply_group_policy.ps1"
+  description: "Grup politikasını uygula"

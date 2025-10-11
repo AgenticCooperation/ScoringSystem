@@ -1,0 +1,21 @@
+rule:
+  id: "screen_saver_locked"
+  name: "Ekran Koruyucu Kilidi"
+  description: "Ekran koruyucu kilidinin etkin olup olmadığını kontrol eder"
+  category: "access_control"
+  severity: "medium"
+  weight: 6
+  
+check:
+  field: "compliance.policies.screen_saver_locked"
+  operator: "equals"
+  expected_value: true
+  
+message:
+  pass: "Ekran koruyucu kilidi etkin"
+  fail: "Ekran koruyucu kilidi devre dışı - güvenlik riski!"
+  
+remediation:
+  action: "enable_screen_saver_lock"
+  script: "scripts/enable_screen_saver_lock.ps1"
+  description: "Ekran koruyucu kilidini etkinleştir"

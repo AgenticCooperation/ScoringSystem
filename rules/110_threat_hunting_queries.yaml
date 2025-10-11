@@ -1,0 +1,21 @@
+rule:
+  id: "threat_hunting_queries"
+  name: "Tehdit Avcılığı Sorguları"
+  description: "Tehdit avcılığı sorgu sayısını kontrol eder"
+  category: "threat_detection"
+  severity: "medium"
+  weight: 5
+  
+check:
+  field: "security.threat_detection.threat_hunting_queries"
+  operator: "greater_than"
+  expected_value: 0
+  
+message:
+  pass: "Tehdit avcılığı sorguları mevcut"
+  fail: "Tehdit avcılığı sorguları yok - proaktif tehdit tespiti eksik!"
+  
+remediation:
+  action: "create_threat_hunting_queries"
+  script: "scripts/create_threat_hunting_queries.ps1"
+  description: "Tehdit avcılığı sorguları oluştur"

@@ -1,0 +1,21 @@
+rule:
+  id: "suspicious_hashes"
+  name: "Şüpheli Hash Değerleri"
+  description: "Şüpheli hash değeri sayısını kontrol eder"
+  category: "threat_intelligence"
+  severity: "high"
+  weight: 8
+  
+check:
+  field: "threat_intelligence.suspicious_hashes"
+  operator: "array_length"
+  expected_value: 0
+  
+message:
+  pass: "Şüpheli hash değeri yok"
+  fail: "Şüpheli hash değerleri tespit edildi - güvenlik riski!"
+  
+remediation:
+  action: "investigate_suspicious_hashes"
+  script: "scripts/investigate_suspicious_hashes.ps1"
+  description: "Şüpheli hash değerlerini araştır"

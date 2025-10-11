@@ -1,0 +1,21 @@
+rule:
+  id: "total_processes"
+  name: "Toplam Proses Sayısı"
+  description: "Toplam proses sayısını kontrol eder"
+  category: "system_management"
+  severity: "low"
+  weight: 2
+  
+check:
+  field: "security.processes.total_processes"
+  operator: "less_than"
+  expected_value: 200
+  
+message:
+  pass: "Proses sayısı normal"
+  fail: "Çok fazla proses - sistem yükü riski!"
+  
+remediation:
+  action: "review_processes"
+  script: "scripts/review_processes.ps1"
+  description: "Prosesleri gözden geçir"

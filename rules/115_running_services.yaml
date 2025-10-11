@@ -1,0 +1,21 @@
+rule:
+  id: "running_services"
+  name: "Çalışan Servisler"
+  description: "Çalışan servis sayısını kontrol eder"
+  category: "system_management"
+  severity: "low"
+  weight: 3
+  
+check:
+  field: "security.services.running_services"
+  operator: "less_than"
+  expected_value: 100
+  
+message:
+  pass: "Çalışan servis sayısı normal"
+  fail: "Çok fazla çalışan servis - yönetim zorluğu!"
+  
+remediation:
+  action: "review_running_services"
+  script: "scripts/review_running_services.ps1"
+  description: "Çalışan servisleri gözden geçir"

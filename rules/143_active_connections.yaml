@@ -1,0 +1,21 @@
+rule:
+  id: "active_connections"
+  name: "Aktif Bağlantılar"
+  description: "Aktif bağlantı sayısını kontrol eder"
+  category: "network_security"
+  severity: "medium"
+  weight: 5
+  
+check:
+  field: "network.connections.active_connections"
+  operator: "less_than"
+  expected_value: 100
+  
+message:
+  pass: "Aktif bağlantı sayısı normal"
+  fail: "Çok fazla aktif bağlantı - ağ yükü riski!"
+  
+remediation:
+  action: "review_active_connections"
+  script: "scripts/review_active_connections.ps1"
+  description: "Aktif bağlantıları gözden geçir"

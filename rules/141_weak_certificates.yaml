@@ -1,0 +1,21 @@
+rule:
+  id: "weak_certificates"
+  name: "Zayıf Sertifikalar"
+  description: "Zayıf sertifika sayısını kontrol eder"
+  category: "certificate_management"
+  severity: "high"
+  weight: 8
+  
+check:
+  field: "security.certificates.weak_certificates"
+  operator: "equals"
+  expected_value: 0
+  
+message:
+  pass: "Zayıf sertifika yok"
+  fail: "Zayıf sertifikalar var - güvenlik riski!"
+  
+remediation:
+  action: "replace_weak_certificates"
+  script: "scripts/replace_weak_certificates.ps1"
+  description: "Zayıf sertifikaları değiştir"

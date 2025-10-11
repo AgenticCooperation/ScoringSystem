@@ -1,0 +1,21 @@
+rule:
+  id: "vpn_encryption_strength"
+  name: "VPN Şifreleme Gücü"
+  description: "VPN şifreleme gücünün yeterli olup olmadığını kontrol eder"
+  category: "network_security"
+  severity: "high"
+  weight: 8
+  
+check:
+  field: "network.vpn.encryption_strength"
+  operator: "not_equals"
+  expected_value: "weak"
+  
+message:
+  pass: "VPN şifreleme gücü yeterli"
+  fail: "VPN şifreleme gücü zayıf - güvenlik riski!"
+  
+remediation:
+  action: "upgrade_vpn_encryption"
+  script: "scripts/upgrade_vpn_encryption.ps1"
+  description: "VPN şifreleme gücünü artır"

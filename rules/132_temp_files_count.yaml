@@ -1,0 +1,21 @@
+rule:
+  id: "temp_files_count"
+  name: "Geçici Dosya Sayısı"
+  description: "Geçici dosya sayısını kontrol eder"
+  category: "system_hygiene"
+  severity: "low"
+  weight: 2
+  
+check:
+  field: "security.files.temp_files_count"
+  operator: "less_than"
+  expected_value: 1000
+  
+message:
+  pass: "Geçici dosya sayısı normal"
+  fail: "Çok fazla geçici dosya - temizlik gerekli!"
+  
+remediation:
+  action: "cleanup_temp_files"
+  script: "scripts/cleanup_temp_files.ps1"
+  description: "Geçici dosyaları temizle"

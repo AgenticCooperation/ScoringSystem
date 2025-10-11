@@ -1,0 +1,21 @@
+rule:
+  id: "installed_apps_count"
+  name: "Kurulu Uygulama Sayısı"
+  description: "Kurulu uygulama sayısını kontrol eder"
+  category: "application_management"
+  severity: "low"
+  weight: 2
+  
+check:
+  field: "applications.installed_apps"
+  operator: "array_length"
+  expected_value: 50
+  
+message:
+  pass: "Kurulu uygulama sayısı normal"
+  fail: "Çok fazla kurulu uygulama - yönetim zorluğu!"
+  
+remediation:
+  action: "review_installed_apps"
+  script: "scripts/review_installed_apps.ps1"
+  description: "Kurulu uygulamaları gözden geçir"

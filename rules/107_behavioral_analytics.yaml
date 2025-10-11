@@ -1,0 +1,21 @@
+rule:
+  id: "behavioral_analytics"
+  name: "Davranışsal Analitik"
+  description: "Davranışsal analitik özelliğinin etkin olup olmadığını kontrol eder"
+  category: "threat_detection"
+  severity: "high"
+  weight: 8
+  
+check:
+  field: "security.threat_detection.behavioral_analytics"
+  operator: "equals"
+  expected_value: true
+  
+message:
+  pass: "Davranışsal analitik etkin"
+  fail: "Davranışsal analitik devre dışı - tehdit tespiti zayıf!"
+  
+remediation:
+  action: "enable_behavioral_analytics"
+  script: "scripts/enable_behavioral_analytics.ps1"
+  description: "Davranışsal analitiği etkinleştir"

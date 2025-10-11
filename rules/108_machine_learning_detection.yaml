@@ -1,0 +1,21 @@
+rule:
+  id: "machine_learning_detection"
+  name: "Makine Öğrenmesi Tespiti"
+  description: "Makine öğrenmesi tespitinin etkin olup olmadığını kontrol eder"
+  category: "threat_detection"
+  severity: "high"
+  weight: 8
+  
+check:
+  field: "security.threat_detection.machine_learning_detection"
+  operator: "equals"
+  expected_value: true
+  
+message:
+  pass: "Makine öğrenmesi tespiti etkin"
+  fail: "Makine öğrenmesi tespiti devre dışı - gelişmiş tehdit tespiti eksik!"
+  
+remediation:
+  action: "enable_machine_learning_detection"
+  script: "scripts/enable_machine_learning_detection.ps1"
+  description: "Makine öğrenmesi tespitini etkinleştir"

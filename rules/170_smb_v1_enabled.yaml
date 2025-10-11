@@ -1,0 +1,21 @@
+rule:
+  id: "smb_v1_enabled"
+  name: "SMBv1 Protokolü"
+  description: "SMBv1 protokolünün devre dışı olup olmadığını kontrol eder"
+  category: "config_hygiene"
+  severity: "critical"
+  weight: 10
+  
+check:
+  field: "config_hygiene.smb_v1_enabled"
+  operator: "equals"
+  expected_value: false
+  
+message:
+  pass: "SMBv1 protokolü devre dışı"
+  fail: "SMBv1 protokolü aktif - kritik güvenlik riski!"
+  
+remediation:
+  action: "disable_smb_v1"
+  script: "scripts/disable_smb_v1.ps1"
+  description: "SMBv1 protokolünü devre dışı bırak"

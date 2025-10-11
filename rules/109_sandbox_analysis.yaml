@@ -1,0 +1,21 @@
+rule:
+  id: "sandbox_analysis"
+  name: "Sandbox Analizi"
+  description: "Sandbox analizinin etkin olup olmadığını kontrol eder"
+  category: "threat_detection"
+  severity: "medium"
+  weight: 6
+  
+check:
+  field: "security.threat_detection.sandbox_analysis"
+  operator: "equals"
+  expected_value: true
+  
+message:
+  pass: "Sandbox analizi etkin"
+  fail: "Sandbox analizi devre dışı - kötü amaçlı yazılım tespiti zayıf!"
+  
+remediation:
+  action: "enable_sandbox_analysis"
+  script: "scripts/enable_sandbox_analysis.ps1"
+  description: "Sandbox analizini etkinleştir"

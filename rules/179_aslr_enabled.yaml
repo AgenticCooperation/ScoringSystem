@@ -1,0 +1,21 @@
+rule:
+  id: "aslr_enabled"
+  name: "ASLR Etkin Kontrolü"
+  description: "Address Space Layout Randomization'ın etkin olup olmadığını kontrol eder"
+  category: "config_hygiene"
+  severity: "high"
+  weight: 8
+  
+check:
+  field: "config_hygiene.aslr_enabled"
+  operator: "equals"
+  expected_value: true
+  
+message:
+  pass: "ASLR etkin durumda"
+  fail: "ASLR devre dışı - güvenlik riski!"
+  
+remediation:
+  action: "enable_aslr"
+  script: "scripts/enable_aslr.ps1"
+  description: "ASLR'ı etkinleştir"

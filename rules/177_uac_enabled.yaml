@@ -1,0 +1,21 @@
+rule:
+  id: "uac_enabled"
+  name: "UAC Etkin Kontrolü"
+  description: "User Account Control'ün etkin olup olmadığını kontrol eder"
+  category: "config_hygiene"
+  severity: "high"
+  weight: 9
+  
+check:
+  field: "config_hygiene.uac_enabled"
+  operator: "equals"
+  expected_value: true
+  
+message:
+  pass: "UAC etkin durumda"
+  fail: "UAC devre dışı - kritik güvenlik riski!"
+  
+remediation:
+  action: "enable_uac"
+  script: "scripts/enable_uac.ps1"
+  description: "UAC'ı etkinleştir"

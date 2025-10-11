@@ -1,0 +1,21 @@
+rule:
+  id: "manual_start_services"
+  name: "Manuel Başlatma Servisleri"
+  description: "Manuel başlatma servis sayısını kontrol eder"
+  category: "system_management"
+  severity: "low"
+  weight: 2
+  
+check:
+  field: "security.services.manual_start_services"
+  operator: "less_than"
+  expected_value: 20
+  
+message:
+  pass: "Manuel başlatma servis sayısı normal"
+  fail: "Çok fazla manuel başlatma servisi - yönetim zorluğu!"
+  
+remediation:
+  action: "review_manual_start_services"
+  script: "scripts/review_manual_start_services.ps1"
+  description: "Manuel başlatma servislerini gözden geçir"

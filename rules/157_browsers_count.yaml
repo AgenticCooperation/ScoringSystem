@@ -1,0 +1,21 @@
+rule:
+  id: "browsers_count"
+  name: "Tarayıcı Sayısı"
+  description: "Kurulu tarayıcı sayısını kontrol eder"
+  category: "application_management"
+  severity: "low"
+  weight: 2
+  
+check:
+  field: "applications.browsers"
+  operator: "array_length"
+  expected_value: 3
+  
+message:
+  pass: "Tarayıcı sayısı normal"
+  fail: "Çok fazla tarayıcı - yönetim zorluğu!"
+  
+remediation:
+  action: "review_browsers"
+  script: "scripts/review_browsers.ps1"
+  description: "Tarayıcıları gözden geçir"

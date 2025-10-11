@@ -1,0 +1,21 @@
+rule:
+  id: "security_policies_active"
+  name: "Aktif Güvenlik Politikaları"
+  description: "Aktif güvenlik politika sayısını kontrol eder"
+  category: "policy_management"
+  severity: "medium"
+  weight: 5
+  
+check:
+  field: "compliance.policies.security_policies_active"
+  operator: "greater_than"
+  expected_value: 5
+  
+message:
+  pass: "Aktif güvenlik politikaları yeterli"
+  fail: "Aktif güvenlik politikaları yetersiz - güvenlik eksikliği!"
+  
+remediation:
+  action: "activate_security_policies"
+  script: "scripts/activate_security_policies.ps1"
+  description: "Güvenlik politikalarını etkinleştir"

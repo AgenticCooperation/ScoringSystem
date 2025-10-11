@@ -1,0 +1,21 @@
+rule:
+  id: "high_cpu_processes"
+  name: "Yüksek CPU Kullanan Prosesler"
+  description: "Yüksek CPU kullanan proses sayısını kontrol eder"
+  category: "performance_monitoring"
+  severity: "medium"
+  weight: 5
+  
+check:
+  field: "security.processes.high_cpu_processes"
+  operator: "array_length"
+  expected_value: 3
+  
+message:
+  pass: "Yüksek CPU kullanan proses sayısı normal"
+  fail: "Çok fazla yüksek CPU kullanan proses - performans sorunu!"
+  
+remediation:
+  action: "investigate_high_cpu_processes"
+  script: "scripts/investigate_high_cpu_processes.ps1"
+  description: "Yüksek CPU kullanan prosesleri araştır"

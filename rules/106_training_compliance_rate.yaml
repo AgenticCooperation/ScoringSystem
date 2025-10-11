@@ -1,0 +1,21 @@
+rule:
+  id: "training_compliance_rate"
+  name: "Eğitim Uyumluluk Oranı"
+  description: "Eğitim uyumluluk oranını kontrol eder"
+  category: "security_training"
+  severity: "medium"
+  weight: 6
+  
+check:
+  field: "security.security_training.training_compliance_rate"
+  operator: "greater_than"
+  expected_value: 80
+  
+message:
+  pass: "Eğitim uyumluluk oranı yüksek"
+  fail: "Eğitim uyumluluk oranı düşük - eğitim zorunluluğu gerekli!"
+  
+remediation:
+  action: "improve_training_compliance"
+  script: "scripts/improve_training_compliance.ps1"
+  description: "Eğitim uyumluluk oranını artır"

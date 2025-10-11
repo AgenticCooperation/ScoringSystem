@@ -1,0 +1,21 @@
+rule:
+  id: "persistence_mechanisms"
+  name: "Kalıcılık Mekanizmaları"
+  description: "Kalıcılık mekanizması sayısını kontrol eder"
+  category: "security_monitoring"
+  severity: "high"
+  weight: 8
+  
+check:
+  field: "security.registry.persistence_mechanisms"
+  operator: "array_length"
+  expected_value: 0
+  
+message:
+  pass: "Şüpheli kalıcılık mekanizması yok"
+  fail: "Şüpheli kalıcılık mekanizmaları tespit edildi - güvenlik riski!"
+  
+remediation:
+  action: "investigate_persistence_mechanisms"
+  script: "scripts/investigate_persistence_mechanisms.ps1"
+  description: "Kalıcılık mekanizmalarını araştır"

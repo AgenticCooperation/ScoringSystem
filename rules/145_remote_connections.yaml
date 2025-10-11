@@ -1,0 +1,21 @@
+rule:
+  id: "remote_connections"
+  name: "Uzak Bağlantılar"
+  description: "Uzak bağlantı sayısını kontrol eder"
+  category: "network_security"
+  severity: "high"
+  weight: 8
+  
+check:
+  field: "network.connections.remote_connections"
+  operator: "less_than"
+  expected_value: 20
+  
+message:
+  pass: "Uzak bağlantı sayısı normal"
+  fail: "Çok fazla uzak bağlantı - güvenlik riski!"
+  
+remediation:
+  action: "review_remote_connections"
+  script: "scripts/review_remote_connections.ps1"
+  description: "Uzak bağlantıları gözden geçir"

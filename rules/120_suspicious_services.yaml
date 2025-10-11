@@ -1,0 +1,21 @@
+rule:
+  id: "suspicious_services"
+  name: "Şüpheli Servisler"
+  description: "Şüpheli servis sayısını kontrol eder"
+  category: "security_monitoring"
+  severity: "high"
+  weight: 9
+  
+check:
+  field: "security.services.suspicious_services"
+  operator: "array_length"
+  expected_value: 0
+  
+message:
+  pass: "Şüpheli servis yok"
+  fail: "Şüpheli servisler tespit edildi - güvenlik riski!"
+  
+remediation:
+  action: "investigate_suspicious_services"
+  script: "scripts/investigate_suspicious_services.ps1"
+  description: "Şüpheli servisleri araştır"

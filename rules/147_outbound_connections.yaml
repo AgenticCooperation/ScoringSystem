@@ -1,0 +1,21 @@
+rule:
+  id: "outbound_connections"
+  name: "Giden Bağlantılar"
+  description: "Giden bağlantı sayısını kontrol eder"
+  category: "network_security"
+  severity: "medium"
+  weight: 5
+  
+check:
+  field: "network.connections.outbound_connections"
+  operator: "less_than"
+  expected_value: 100
+  
+message:
+  pass: "Giden bağlantı sayısı normal"
+  fail: "Çok fazla giden bağlantı - ağ yükü riski!"
+  
+remediation:
+  action: "review_outbound_connections"
+  script: "scripts/review_outbound_connections.ps1"
+  description: "Giden bağlantıları gözden geçir"

@@ -1,0 +1,21 @@
+rule:
+  id: "encrypted_volumes"
+  name: "Şifreli Volume Sayısı"
+  description: "Şifreli volume sayısını kontrol eder"
+  category: "encryption"
+  severity: "medium"
+  weight: 6
+  
+check:
+  field: "compliance.encryption.encrypted_volumes_count"
+  operator: "greater_than"
+  expected_value: 0
+  
+message:
+  pass: "Şifreli volume mevcut"
+  fail: "Şifreli volume yok - veri güvenliği riski!"
+  
+remediation:
+  action: "encrypt_volumes"
+  script: "scripts/encrypt_volumes.ps1"
+  description: "Volume'ları şifrele"

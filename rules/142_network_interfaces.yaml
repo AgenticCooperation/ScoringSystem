@@ -1,0 +1,21 @@
+rule:
+  id: "network_interfaces"
+  name: "Ağ Arayüzleri"
+  description: "Ağ arayüz sayısını kontrol eder"
+  category: "network_security"
+  severity: "low"
+  weight: 2
+  
+check:
+  field: "network.interfaces"
+  operator: "array_length"
+  expected_value: 5
+  
+message:
+  pass: "Ağ arayüz sayısı normal"
+  fail: "Çok fazla ağ arayüzü - yönetim zorluğu!"
+  
+remediation:
+  action: "review_network_interfaces"
+  script: "scripts/review_network_interfaces.ps1"
+  description: "Ağ arayüzlerini gözden geçir"

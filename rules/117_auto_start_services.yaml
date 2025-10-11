@@ -1,0 +1,21 @@
+rule:
+  id: "auto_start_services"
+  name: "Otomatik Başlatma Servisleri"
+  description: "Otomatik başlatma servis sayısını kontrol eder"
+  category: "system_management"
+  severity: "medium"
+  weight: 4
+  
+check:
+  field: "security.services.auto_start_services"
+  operator: "less_than"
+  expected_value: 30
+  
+message:
+  pass: "Otomatik başlatma servis sayısı normal"
+  fail: "Çok fazla otomatik başlatma servisi - güvenlik riski!"
+  
+remediation:
+  action: "review_auto_start_services"
+  script: "scripts/review_auto_start_services.ps1"
+  description: "Otomatik başlatma servislerini gözden geçir"

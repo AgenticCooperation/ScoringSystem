@@ -1,0 +1,21 @@
+rule:
+  id: "bitlocker_enabled"
+  name: "BitLocker Etkin Kontrolü"
+  description: "BitLocker şifrelemesinin etkin olup olmadığını kontrol eder"
+  category: "encryption"
+  severity: "high"
+  weight: 9
+  
+check:
+  field: "compliance.encryption.bitlocker_enabled"
+  operator: "equals"
+  expected_value: true
+  
+message:
+  pass: "BitLocker etkin durumda"
+  fail: "BitLocker devre dışı - disk şifreleme riski!"
+  
+remediation:
+  action: "enable_bitlocker"
+  script: "scripts/enable_bitlocker.ps1"
+  description: "BitLocker'ı etkinleştir"

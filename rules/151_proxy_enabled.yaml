@@ -1,0 +1,21 @@
+rule:
+  id: "proxy_enabled"
+  name: "Proxy Etkin Kontrolü"
+  description: "Proxy kullanımının etkin olup olmadığını kontrol eder"
+  category: "network_security"
+  severity: "low"
+  weight: 3
+  
+check:
+  field: "network.proxy.enabled"
+  operator: "equals"
+  expected_value: true
+  
+message:
+  pass: "Proxy kullanımı etkin"
+  fail: "Proxy kullanımı devre dışı - ağ güvenliği artırılabilir!"
+  
+remediation:
+  action: "enable_proxy"
+  script: "scripts/enable_proxy.ps1"
+  description: "Proxy kullanımını etkinleştir"

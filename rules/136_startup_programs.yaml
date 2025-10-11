@@ -1,0 +1,21 @@
+rule:
+  id: "startup_programs"
+  name: "Başlangıç Programları"
+  description: "Başlangıç program sayısını kontrol eder"
+  category: "system_management"
+  severity: "medium"
+  weight: 5
+  
+check:
+  field: "security.registry.startup_programs"
+  operator: "array_length"
+  expected_value: 10
+  
+message:
+  pass: "Başlangıç program sayısı normal"
+  fail: "Çok fazla başlangıç programı - güvenlik ve performans riski!"
+  
+remediation:
+  action: "review_startup_programs"
+  script: "scripts/review_startup_programs.ps1"
+  description: "Başlangıç programlarını gözden geçir"

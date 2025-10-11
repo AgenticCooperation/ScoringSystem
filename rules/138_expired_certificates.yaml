@@ -1,0 +1,21 @@
+rule:
+  id: "expired_certificates"
+  name: "Süresi Geçmiş Sertifikalar"
+  description: "Süresi geçmiş sertifika sayısını kontrol eder"
+  category: "certificate_management"
+  severity: "high"
+  weight: 8
+  
+check:
+  field: "security.certificates.expired_certificates"
+  operator: "equals"
+  expected_value: 0
+  
+message:
+  pass: "Süresi geçmiş sertifika yok"
+  fail: "Süresi geçmiş sertifikalar var - güvenlik riski!"
+  
+remediation:
+  action: "renew_expired_certificates"
+  script: "scripts/renew_expired_certificates.ps1"
+  description: "Süresi geçmiş sertifikaları yenile"

@@ -1,0 +1,21 @@
+rule:
+  id: "expiring_30d"
+  name: "30 Gün İçinde Süresi Dolacak Sertifikalar"
+  description: "30 gün içinde süresi dolacak sertifika sayısını kontrol eder"
+  category: "certificate_management"
+  severity: "medium"
+  weight: 6
+  
+check:
+  field: "security.certificates.expiring_30d"
+  operator: "less_than"
+  expected_value: 5
+  
+message:
+  pass: "Yakında süresi dolacak sertifika sayısı normal"
+  fail: "Çok fazla yakında süresi dolacak sertifika - yenileme planı gerekli!"
+  
+remediation:
+  action: "plan_certificate_renewal"
+  script: "scripts/plan_certificate_renewal.ps1"
+  description: "Sertifika yenileme planı yap"

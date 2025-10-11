@@ -1,0 +1,21 @@
+rule:
+  id: "suspicious_dns_queries"
+  name: "Şüpheli DNS Sorguları"
+  description: "Şüpheli DNS sorgu sayısını kontrol eder"
+  category: "network_security"
+  severity: "high"
+  weight: 8
+  
+check:
+  field: "network.dns.suspicious_dns_queries"
+  operator: "array_length"
+  expected_value: 0
+  
+message:
+  pass: "Şüpheli DNS sorgusu yok"
+  fail: "Şüpheli DNS sorguları tespit edildi - güvenlik riski!"
+  
+remediation:
+  action: "investigate_suspicious_dns_queries"
+  script: "scripts/investigate_suspicious_dns_queries.ps1"
+  description: "Şüpheli DNS sorgularını araştır"

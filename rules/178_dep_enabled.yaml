@@ -1,0 +1,21 @@
+rule:
+  id: "dep_enabled"
+  name: "DEP Etkin Kontrolü"
+  description: "Data Execution Prevention'ın etkin olup olmadığını kontrol eder"
+  category: "config_hygiene"
+  severity: "high"
+  weight: 8
+  
+check:
+  field: "config_hygiene.dep_enabled"
+  operator: "equals"
+  expected_value: true
+  
+message:
+  pass: "DEP etkin durumda"
+  fail: "DEP devre dışı - güvenlik riski!"
+  
+remediation:
+  action: "enable_dep"
+  script: "scripts/enable_dep.ps1"
+  description: "DEP'ı etkinleştir"

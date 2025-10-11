@@ -1,0 +1,21 @@
+rule:
+  id: "suspicious_keys"
+  name: "Şüpheli Registry Anahtarları"
+  description: "Şüpheli registry anahtarı sayısını kontrol eder"
+  category: "security_monitoring"
+  severity: "high"
+  weight: 8
+  
+check:
+  field: "security.registry.suspicious_keys"
+  operator: "array_length"
+  expected_value: 0
+  
+message:
+  pass: "Şüpheli registry anahtarı yok"
+  fail: "Şüpheli registry anahtarları tespit edildi - güvenlik riski!"
+  
+remediation:
+  action: "investigate_suspicious_keys"
+  script: "scripts/investigate_suspicious_keys.ps1"
+  description: "Şüpheli registry anahtarlarını araştır"
