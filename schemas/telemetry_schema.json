@@ -49,19 +49,15 @@
             "disk_free_gb": {"type": "number", "minimum": 0},
             "manufacturer": {"type": "string"},
             "model": {"type": "string"},
-            "hardware_name": {"type": "string"},
-            "hardware_model": {"type": "string"},
-            "chip_info": {"type": "string"},
+            "cpu_info": {"type": "string"},
             "memory_info": {"type": "string"},
-            "cpu_brand": {"type": "string"},
             "serial_number": {"type": "string"},
             "bios_version": {"type": "string"},
             "secure_boot_enabled": {"type": "boolean"},
             "tpm_enabled": {"type": "boolean"},
             "tpm_version": {"type": "string"},
             "sip_enabled": {"type": "boolean"},
-            "gatekeeper_enabled": {"type": "boolean"},
-            "filevault_enabled": {"type": "boolean"}
+            "gatekeeper_enabled": {"type": "boolean"}
           }
         },
         "hostname": {"type": "string"},
