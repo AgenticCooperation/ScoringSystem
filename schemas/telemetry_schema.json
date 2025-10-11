@@ -37,7 +37,6 @@
             "architecture": {"type": "string", "enum": ["x64", "x86", "arm64", "arm32"]},
             "edition": {"type": "string"},
             "language": {"type": "string"},
-            "timezone": {"type": "string"}
           }
         },
         "hardware": {
@@ -388,7 +387,6 @@
           "type": "object",
           "properties": {
             "active_connections": {"type": "number", "minimum": 0},
-            "listening_ports": {"type": "array", "items": {"type": "number"}},
             "open_ports": {"type": "array", "items": {"type": "number"}},
             "listening_services": {"type": "array", "items": {"type": "string"}},
             "remote_connections": {"type": "number", "minimum": 0},
@@ -479,17 +477,6 @@
       "type": "object",
       "description": "Uyumluluk ve denetim",
       "properties": {
-        "audit_logs": {
-          "type": "object",
-          "properties": {
-            "enabled": {"type": "boolean"},
-            "log_size_mb": {"type": "number", "minimum": 0},
-            "retention_days": {"type": "number", "minimum": 0},
-            "failed_logins_24h": {"type": "number", "minimum": 0},
-            "privilege_escalations_24h": {"type": "number", "minimum": 0},
-            "file_access_events_24h": {"type": "number", "minimum": 0}
-          }
-        },
         "encryption": {
           "type": "object",
           "properties": {
@@ -500,23 +487,12 @@
             "encryption_algorithm": {"type": "string"}
           }
         },
-        "backup": {
-          "type": "object",
-          "properties": {
-            "last_backup_days": {"type": "number", "minimum": 0},
-            "backup_size_gb": {"type": "number", "minimum": 0},
-            "backup_location": {"type": "string"},
-            "backup_encrypted": {"type": "boolean"},
-            "backup_verified": {"type": "boolean"}
-          }
-        },
         "policies": {
           "type": "object",
           "properties": {
             "group_policy_applied": {"type": "boolean"},
             "local_policies_count": {"type": "number", "minimum": 0},
             "security_policies_active": {"type": "number", "minimum": 0},
-            "password_policy_enforced": {"type": "boolean"},
             "screen_saver_locked": {"type": "boolean"},
             "usb_restrictions": {"type": "boolean"}
           }
@@ -554,8 +530,6 @@
         "malicious_domains": {"type": "array", "items": {"type": "string"}},
         "suspicious_hashes": {"type": "array", "items": {"type": "string"}},
         "tor_usage": {"type": "boolean"},
-        "proxy_usage": {"type": "boolean"},
-        "vpn_usage": {"type": "boolean"},
         "geolocation_anomalies": {"type": "array", "items": {"type": "string"}}
       }
     }
