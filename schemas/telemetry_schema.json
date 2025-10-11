@@ -539,6 +539,8 @@
         "file_sharing_enabled": {"type": "boolean"},
         "anonymous_sharing": {"type": "boolean"},
         "smb_v1_enabled": {"type": "boolean"},
+        "telnet_enabled": {"type": "boolean"},
+        "ftp_enabled": {"type": "boolean"},
         "llmnr_enabled": {"type": "boolean"},
         "netbios_enabled": {"type": "boolean"},
         "wpad_enabled": {"type": "boolean"},
