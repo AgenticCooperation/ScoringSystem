@@ -1,0 +1,21 @@
+rule:
+  id: "orphaned_accounts"
+  name: "Yetim Hesap Kontrolü"
+  description: "Yetim hesap sayısını kontrol eder"
+  category: "access_control"
+  severity: "high"
+  weight: 7
+  
+check:
+  field: "security.privilege_management.orphaned_accounts"
+  operator: "equals"
+  expected_value: 0
+  
+message:
+  pass: "Yetim hesap yok"
+  fail: "Yetim hesaplar var - güvenlik riski!"
+  
+remediation:
+  action: "cleanup_orphaned_accounts"
+  script: "scripts/cleanup_orphaned_accounts.ps1"
+  description: "Yetim hesapları temizle"

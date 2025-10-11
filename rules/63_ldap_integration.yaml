@@ -1,0 +1,21 @@
+rule:
+  id: "ldap_integration"
+  name: "LDAP Entegrasyonu"
+  description: "LDAP entegrasyonunun etkin olup olmadığını kontrol eder"
+  category: "authentication"
+  severity: "medium"
+  weight: 6
+  
+check:
+  field: "security.authentication.ldap_integration"
+  operator: "equals"
+  expected_value: true
+  
+message:
+  pass: "LDAP entegrasyonu etkin"
+  fail: "LDAP entegrasyonu devre dışı - merkezi kimlik doğrulama eksik!"
+  
+remediation:
+  action: "enable_ldap_integration"
+  script: "scripts/enable_ldap_integration.ps1"
+  description: "LDAP entegrasyonunu etkinleştir"

@@ -1,0 +1,21 @@
+rule:
+  id: "sso_enabled"
+  name: "SSO Etkin Kontrolü"
+  description: "Single Sign-On özelliğinin etkin olup olmadığını kontrol eder"
+  category: "authentication"
+  severity: "medium"
+  weight: 7
+  
+check:
+  field: "security.authentication.sso_enabled"
+  operator: "equals"
+  expected_value: true
+  
+message:
+  pass: "SSO etkin durumda"
+  fail: "SSO devre dışı - kullanıcı deneyimi ve güvenlik zayıf!"
+  
+remediation:
+  action: "enable_sso"
+  script: "scripts/enable_sso.ps1"
+  description: "SSO'yu etkinleştir"

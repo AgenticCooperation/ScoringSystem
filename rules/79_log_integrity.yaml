@@ -1,0 +1,21 @@
+rule:
+  id: "log_integrity"
+  name: "Log Bütünlüğü İzleme"
+  description: "Log bütünlüğü izlemenin etkin olup olmadığını kontrol eder"
+  category: "logging_monitoring"
+  severity: "high"
+  weight: 8
+  
+check:
+  field: "security.logging.log_integrity_monitoring"
+  operator: "equals"
+  expected_value: true
+  
+message:
+  pass: "Log bütünlüğü izleme etkin"
+  fail: "Log bütünlüğü izleme devre dışı - log manipülasyon riski!"
+  
+remediation:
+  action: "enable_log_integrity_monitoring"
+  script: "scripts/enable_log_integrity_monitoring.ps1"
+  description: "Log bütünlüğü izlemeyi etkinleştir"

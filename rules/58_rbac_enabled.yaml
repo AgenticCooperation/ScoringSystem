@@ -1,0 +1,21 @@
+rule:
+  id: "rbac_enabled"
+  name: "RBAC Etkin Kontrolü"
+  description: "Role-Based Access Control'ün etkin olup olmadığını kontrol eder"
+  category: "access_control"
+  severity: "high"
+  weight: 8
+  
+check:
+  field: "security.access_control.rbac_enabled"
+  operator: "equals"
+  expected_value: true
+  
+message:
+  pass: "RBAC etkin durumda"
+  fail: "RBAC devre dışı - erişim kontrolü zayıf!"
+  
+remediation:
+  action: "enable_rbac"
+  script: "scripts/enable_rbac.ps1"
+  description: "RBAC'ı etkinleştir"

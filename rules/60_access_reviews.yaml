@@ -1,0 +1,21 @@
+rule:
+  id: "access_reviews"
+  name: "Düzenli Erişim İncelemesi"
+  description: "Düzenli erişim incelemelerinin yapılıp yapılmadığını kontrol eder"
+  category: "access_control"
+  severity: "medium"
+  weight: 6
+  
+check:
+  field: "security.access_control.regular_access_reviews"
+  operator: "equals"
+  expected_value: true
+  
+message:
+  pass: "Düzenli erişim incelemeleri yapılıyor"
+  fail: "Düzenli erişim incelemeleri yapılmıyor - yönetim eksikliği!"
+  
+remediation:
+  action: "schedule_access_reviews"
+  script: "scripts/schedule_access_reviews.ps1"
+  description: "Düzenli erişim incelemelerini planla"

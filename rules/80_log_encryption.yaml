@@ -1,0 +1,21 @@
+rule:
+  id: "log_encryption"
+  name: "Log Şifreleme"
+  description: "Log şifrelemenin etkin olup olmadığını kontrol eder"
+  category: "logging_monitoring"
+  severity: "medium"
+  weight: 7
+  
+check:
+  field: "security.logging.log_encryption"
+  operator: "equals"
+  expected_value: true
+  
+message:
+  pass: "Log şifreleme etkin"
+  fail: "Log şifreleme devre dışı - log güvenliği zayıf!"
+  
+remediation:
+  action: "enable_log_encryption"
+  script: "scripts/enable_log_encryption.ps1"
+  description: "Log şifrelemeyi etkinleştir"

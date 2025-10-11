@@ -1,0 +1,21 @@
+rule:
+  id: "geolocation_restrictions"
+  name: "Coğrafi Konum Kısıtlamaları"
+  description: "Coğrafi konum kısıtlamalarının etkin olup olmadığını kontrol eder"
+  category: "access_control"
+  severity: "medium"
+  weight: 6
+  
+check:
+  field: "security.account_security.geolocation_restrictions"
+  operator: "equals"
+  expected_value: true
+  
+message:
+  pass: "Coğrafi konum kısıtlamaları etkin"
+  fail: "Coğrafi konum kısıtlamaları devre dışı - güvenlik artırılabilir!"
+  
+remediation:
+  action: "enable_geolocation_restrictions"
+  script: "scripts/enable_geolocation_restrictions.ps1"
+  description: "Coğrafi konum kısıtlamalarını etkinleştir"

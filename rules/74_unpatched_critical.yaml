@@ -1,0 +1,21 @@
+rule:
+  id: "unpatched_critical"
+  name: "Yamalanmamış Kritik Açıklar"
+  description: "Yamalanmamış kritik güvenlik açığı sayısını kontrol eder"
+  category: "vulnerability_management"
+  severity: "critical"
+  weight: 10
+  
+check:
+  field: "security.vulnerabilities.unpatched_critical"
+  operator: "equals"
+  expected_value: 0
+  
+message:
+  pass: "Yamalanmamış kritik açık yok"
+  fail: "Yamalanmamış kritik açıklar var - acil yama gerekli!"
+  
+remediation:
+  action: "patch_critical_vulnerabilities"
+  script: "scripts/patch_critical_vulnerabilities.ps1"
+  description: "Kritik güvenlik açıklarını acil yamala"

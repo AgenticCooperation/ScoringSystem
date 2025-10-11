@@ -1,0 +1,21 @@
+rule:
+  id: "session_encryption"
+  name: "Oturum Şifreleme Kontrolü"
+  description: "Oturum şifrelemesinin etkin olup olmadığını kontrol eder"
+  category: "access_control"
+  severity: "high"
+  weight: 8
+  
+check:
+  field: "security.session_management.session_encryption"
+  operator: "equals"
+  expected_value: true
+  
+message:
+  pass: "Oturum şifrelemesi etkin"
+  fail: "Oturum şifrelemesi devre dışı - güvenlik riski!"
+  
+remediation:
+  action: "enable_session_encryption"
+  script: "scripts/enable_session_encryption.ps1"
+  description: "Oturum şifrelemesini etkinleştir"

@@ -1,0 +1,21 @@
+rule:
+  id: "segregation_duties"
+  name: "Görev Ayrımı"
+  description: "Görev ayrımının uygulanıp uygulanmadığını kontrol eder"
+  category: "access_control"
+  severity: "high"
+  weight: 8
+  
+check:
+  field: "security.access_control.segregation_of_duties"
+  operator: "equals"
+  expected_value: true
+  
+message:
+  pass: "Görev ayrımı uygulanıyor"
+  fail: "Görev ayrımı uygulanmıyor - iç kontrol zayıf!"
+  
+remediation:
+  action: "implement_segregation_duties"
+  script: "scripts/implement_segregation_duties.ps1"
+  description: "Görev ayrımını uygula"

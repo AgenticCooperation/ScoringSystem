@@ -1,0 +1,21 @@
+rule:
+  id: "excessive_privileges"
+  name: "Aşırı Ayrıcalık Kontrolü"
+  description: "Aşırı ayrıcalığa sahip hesap sayısını kontrol eder"
+  category: "access_control"
+  severity: "high"
+  weight: 8
+  
+check:
+  field: "security.privilege_management.excessive_privileges"
+  operator: "equals"
+  expected_value: 0
+  
+message:
+  pass: "Aşırı ayrıcalığa sahip hesap yok"
+  fail: "Aşırı ayrıcalığa sahip hesaplar var - güvenlik riski!"
+  
+remediation:
+  action: "review_excessive_privileges"
+  script: "scripts/review_excessive_privileges.ps1"
+  description: "Aşırı ayrıcalıkları gözden geçir"

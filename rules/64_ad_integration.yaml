@@ -1,0 +1,21 @@
+rule:
+  id: "ad_integration"
+  name: "Active Directory Entegrasyonu"
+  description: "Active Directory entegrasyonunun etkin olup olmadığını kontrol eder"
+  category: "authentication"
+  severity: "high"
+  weight: 8
+  
+check:
+  field: "security.authentication.ad_integration"
+  operator: "equals"
+  expected_value: true
+  
+message:
+  pass: "Active Directory entegrasyonu etkin"
+  fail: "Active Directory entegrasyonu devre dışı - merkezi yönetim eksik!"
+  
+remediation:
+  action: "enable_ad_integration"
+  script: "scripts/enable_ad_integration.ps1"
+  description: "Active Directory entegrasyonunu etkinleştir"

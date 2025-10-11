@@ -1,0 +1,21 @@
+rule:
+  id: "biometric_auth"
+  name: "Biyometrik Kimlik Doğrulama"
+  description: "Biyometrik kimlik doğrulamanın etkin olup olmadığını kontrol eder"
+  category: "authentication"
+  severity: "low"
+  weight: 4
+  
+check:
+  field: "security.authentication.biometric_auth"
+  operator: "equals"
+  expected_value: true
+  
+message:
+  pass: "Biyometrik kimlik doğrulama etkin"
+  fail: "Biyometrik kimlik doğrulama devre dışı - güvenlik artırılabilir!"
+  
+remediation:
+  action: "enable_biometric_auth"
+  script: "scripts/enable_biometric_auth.ps1"
+  description: "Biyometrik kimlik doğrulamayı etkinleştir"

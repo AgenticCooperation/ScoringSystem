@@ -1,0 +1,21 @@
+rule:
+  id: "account_lockout_duration"
+  name: "Hesap Kilitleme Süresi"
+  description: "Hesap kilitleme süresinin uygun olup olmadığını kontrol eder"
+  category: "access_control"
+  severity: "medium"
+  weight: 6
+  
+check:
+  field: "security.account_security.account_lockout_duration"
+  operator: "greater_than"
+  expected_value: 0
+  
+message:
+  pass: "Hesap kilitleme süresi ayarlanmış"
+  fail: "Hesap kilitleme süresi ayarlanmamış - brute force saldırı riski!"
+  
+remediation:
+  action: "set_account_lockout_duration"
+  script: "scripts/set_account_lockout_duration.ps1"
+  description: "Hesap kilitleme süresini ayarla"

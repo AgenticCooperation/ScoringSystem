@@ -1,0 +1,21 @@
+rule:
+  id: "access_certification"
+  name: "Erişim Sertifikasyonu"
+  description: "Erişim sertifikasyonunun güncel olup olmadığını kontrol eder"
+  category: "access_control"
+  severity: "medium"
+  weight: 5
+  
+check:
+  field: "security.access_control.access_certification_due"
+  operator: "equals"
+  expected_value: false
+  
+message:
+  pass: "Erişim sertifikasyonu güncel"
+  fail: "Erişim sertifikasyonu süresi dolmuş - yenileme gerekli!"
+  
+remediation:
+  action: "renew_access_certification"
+  script: "scripts/renew_access_certification.ps1"
+  description: "Erişim sertifikasyonunu yenile"

@@ -1,0 +1,21 @@
+rule:
+  id: "log_forwarding"
+  name: "Log İletimi"
+  description: "Log iletiminin etkin olup olmadığını kontrol eder"
+  category: "logging_monitoring"
+  severity: "medium"
+  weight: 6
+  
+check:
+  field: "security.logging.log_forwarding_enabled"
+  operator: "equals"
+  expected_value: true
+  
+message:
+  pass: "Log iletimi etkin"
+  fail: "Log iletimi devre dışı - merkezi log yönetimi eksik!"
+  
+remediation:
+  action: "enable_log_forwarding"
+  script: "scripts/enable_log_forwarding.ps1"
+  description: "Log iletimini etkinleştir"

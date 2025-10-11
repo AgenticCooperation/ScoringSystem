@@ -1,0 +1,21 @@
+rule:
+  id: "least_privilege"
+  name: "En Az Ayrıcalık Prensibi"
+  description: "En az ayrıcalık prensibinin uygulanıp uygulanmadığını kontrol eder"
+  category: "access_control"
+  severity: "high"
+  weight: 9
+  
+check:
+  field: "security.access_control.principle_of_least_privilege"
+  operator: "equals"
+  expected_value: true
+  
+message:
+  pass: "En az ayrıcalık prensibi uygulanıyor"
+  fail: "En az ayrıcalık prensibi uygulanmıyor - güvenlik riski!"
+  
+remediation:
+  action: "implement_least_privilege"
+  script: "scripts/implement_least_privilege.ps1"
+  description: "En az ayrıcalık prensibini uygula"

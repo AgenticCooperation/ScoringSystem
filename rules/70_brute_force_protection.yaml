@@ -1,0 +1,21 @@
+rule:
+  id: "brute_force_protection"
+  name: "Brute Force Koruması"
+  description: "Brute force korumasının etkin olup olmadığını kontrol eder"
+  category: "access_control"
+  severity: "high"
+  weight: 9
+  
+check:
+  field: "security.account_security.brute_force_protection"
+  operator: "equals"
+  expected_value: true
+  
+message:
+  pass: "Brute force koruması etkin"
+  fail: "Brute force koruması devre dışı - kritik güvenlik riski!"
+  
+remediation:
+  action: "enable_brute_force_protection"
+  script: "scripts/enable_brute_force_protection.ps1"
+  description: "Brute force korumasını etkinleştir"

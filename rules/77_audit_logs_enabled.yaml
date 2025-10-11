@@ -1,0 +1,21 @@
+rule:
+  id: "audit_logs_enabled"
+  name: "Audit Log Etkin Kontrolü"
+  description: "Audit loglarının etkin olup olmadığını kontrol eder"
+  category: "logging_monitoring"
+  severity: "high"
+  weight: 8
+  
+check:
+  field: "security.logging.audit_logs_enabled"
+  operator: "equals"
+  expected_value: true
+  
+message:
+  pass: "Audit loglar etkin durumda"
+  fail: "Audit loglar devre dışı - denetim eksikliği!"
+  
+remediation:
+  action: "enable_audit_logs"
+  script: "scripts/enable_audit_logs.ps1"
+  description: "Audit logları etkinleştir"

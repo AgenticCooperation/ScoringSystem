@@ -1,0 +1,21 @@
+rule:
+  id: "suspicious_login_detection"
+  name: "Şüpheli Giriş Tespiti"
+  description: "Şüpheli giriş tespitinin etkin olup olmadığını kontrol eder"
+  category: "access_control"
+  severity: "high"
+  weight: 8
+  
+check:
+  field: "security.account_security.suspicious_login_detection"
+  operator: "equals"
+  expected_value: true
+  
+message:
+  pass: "Şüpheli giriş tespiti etkin"
+  fail: "Şüpheli giriş tespiti devre dışı - güvenlik riski!"
+  
+remediation:
+  action: "enable_suspicious_login_detection"
+  script: "scripts/enable_suspicious_login_detection.ps1"
+  description: "Şüpheli giriş tespitini etkinleştir"

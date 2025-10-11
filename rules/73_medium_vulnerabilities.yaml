@@ -1,0 +1,21 @@
+rule:
+  id: "medium_vulnerabilities"
+  name: "Orta Seviye Güvenlik Açıkları"
+  description: "Orta seviye güvenlik açığı sayısını kontrol eder"
+  category: "vulnerability_management"
+  severity: "medium"
+  weight: 5
+  
+check:
+  field: "security.vulnerabilities.medium_vulns"
+  operator: "less_than"
+  expected_value: 20
+  
+message:
+  pass: "Orta seviye güvenlik açığı sayısı kabul edilebilir"
+  fail: "Çok fazla orta seviye güvenlik açığı - yama gerekli!"
+  
+remediation:
+  action: "patch_medium_vulnerabilities"
+  script: "scripts/patch_medium_vulnerabilities.ps1"
+  description: "Orta seviye güvenlik açıklarını yamala"

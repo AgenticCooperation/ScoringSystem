@@ -1,0 +1,21 @@
+rule:
+  id: "privileged_accounts"
+  name: "Ayrıcalıklı Hesap Kontrolü"
+  description: "Ayrıcalıklı hesap sayısını kontrol eder"
+  category: "access_control"
+  severity: "high"
+  weight: 8
+  
+check:
+  field: "security.privilege_management.privileged_accounts"
+  operator: "less_than"
+  expected_value: 5
+  
+message:
+  pass: "Ayrıcalıklı hesap sayısı normal"
+  fail: "Çok fazla ayrıcalıklı hesap - güvenlik riski!"
+  
+remediation:
+  action: "review_privileged_accounts"
+  script: "scripts/review_privileged_accounts.ps1"
+  description: "Ayrıcalıklı hesapları gözden geçir"

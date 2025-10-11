@@ -1,0 +1,21 @@
+rule:
+  id: "smart_card_auth"
+  name: "Akıllı Kart Kimlik Doğrulama"
+  description: "Akıllı kart kimlik doğrulamanın etkin olup olmadığını kontrol eder"
+  category: "authentication"
+  severity: "medium"
+  weight: 6
+  
+check:
+  field: "security.authentication.smart_card_auth"
+  operator: "equals"
+  expected_value: true
+  
+message:
+  pass: "Akıllı kart kimlik doğrulama etkin"
+  fail: "Akıllı kart kimlik doğrulama devre dışı - güvenlik artırılabilir!"
+  
+remediation:
+  action: "enable_smart_card_auth"
+  script: "scripts/enable_smart_card_auth.ps1"
+  description: "Akıllı kart kimlik doğrulamayı etkinleştir"
