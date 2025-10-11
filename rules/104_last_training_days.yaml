@@ -1,0 +1,21 @@
+rule:
+  id: "last_training_days"
+  name: "Son Güvenlik Eğitimi"
+  description: "Son güvenlik eğitiminin ne kadar önce yapıldığını kontrol eder"
+  category: "security_training"
+  severity: "medium"
+  weight: 5
+  
+check:
+  field: "security.security_training.last_training_days"
+  operator: "less_than"
+  expected_value: 365
+  
+message:
+  pass: "Güvenlik eğitimi güncel"
+  fail: "Güvenlik eğitimi eski - yenileme gerekli!"
+  
+remediation:
+  action: "schedule_security_training"
+  script: "scripts/schedule_security_training.ps1"
+  description: "Güvenlik eğitimini planla"

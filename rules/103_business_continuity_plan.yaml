@@ -1,0 +1,21 @@
+rule:
+  id: "business_continuity_plan"
+  name: "İş Sürekliliği Planı"
+  description: "İş sürekliliği planının mevcut olup olmadığını kontrol eder"
+  category: "policy_management"
+  severity: "high"
+  weight: 8
+  
+check:
+  field: "security.security_policies.business_continuity_plan"
+  operator: "equals"
+  expected_value: true
+  
+message:
+  pass: "İş sürekliliği planı mevcut"
+  fail: "İş sürekliliği planı eksik - iş sürekliliği riski!"
+  
+remediation:
+  action: "create_business_continuity_plan"
+  script: "scripts/create_business_continuity_plan.ps1"
+  description: "İş sürekliliği planı oluştur"

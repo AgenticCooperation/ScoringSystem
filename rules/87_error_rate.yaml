@@ -1,0 +1,21 @@
+rule:
+  id: "error_rate"
+  name: "Hata Oranı"
+  description: "24 saatlik hata oranını kontrol eder"
+  category: "system_health"
+  severity: "medium"
+  weight: 5
+  
+check:
+  field: "security.health.error_rate_24h"
+  operator: "less_than"
+  expected_value: 5
+  
+message:
+  pass: "Hata oranı normal"
+  fail: "Yüksek hata oranı - sistem kararlılığı riski!"
+  
+remediation:
+  action: "investigate_errors"
+  script: "scripts/investigate_errors.ps1"
+  description: "Hataları araştır ve düzelt"

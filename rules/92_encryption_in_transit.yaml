@@ -1,0 +1,21 @@
+rule:
+  id: "encryption_in_transit"
+  name: "Veri İletiminde Şifreleme"
+  description: "Veri iletiminde şifrelemenin etkin olup olmadığını kontrol eder"
+  category: "data_protection"
+  severity: "high"
+  weight: 9
+  
+check:
+  field: "security.data_protection.encryption_in_transit"
+  operator: "equals"
+  expected_value: true
+  
+message:
+  pass: "Veri iletiminde şifreleme etkin"
+  fail: "Veri iletiminde şifreleme devre dışı - kritik güvenlik riski!"
+  
+remediation:
+  action: "enable_encryption_in_transit"
+  script: "scripts/enable_encryption_in_transit.ps1"
+  description: "Veri iletiminde şifrelemeyi etkinleştir"

@@ -1,0 +1,21 @@
+rule:
+  id: "disk_usage"
+  name: "Disk Kullanımı"
+  description: "Disk kullanım yüzdesini kontrol eder"
+  category: "performance"
+  severity: "medium"
+  weight: 5
+  
+check:
+  field: "security.performance.disk_usage_percent"
+  operator: "less_than"
+  expected_value: 85
+  
+message:
+  pass: "Disk kullanımı normal"
+  fail: "Disk kullanımı yüksek - performans sorunu riski!"
+  
+remediation:
+  action: "cleanup_disk_space"
+  script: "scripts/cleanup_disk_space.ps1"
+  description: "Disk alanını temizle"

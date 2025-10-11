@@ -1,0 +1,21 @@
+rule:
+  id: "rights_management"
+  name: "Hak Yönetimi"
+  description: "Hak yönetiminin etkin olup olmadığını kontrol eder"
+  category: "data_protection"
+  severity: "medium"
+  weight: 7
+  
+check:
+  field: "security.data_protection.rights_management"
+  operator: "equals"
+  expected_value: true
+  
+message:
+  pass: "Hak yönetimi etkin"
+  fail: "Hak yönetimi devre dışı - veri erişim kontrolü zayıf!"
+  
+remediation:
+  action: "enable_rights_management"
+  script: "scripts/enable_rights_management.ps1"
+  description: "Hak yönetimini etkinleştir"

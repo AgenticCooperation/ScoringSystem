@@ -1,0 +1,21 @@
+rule:
+  id: "incident_team_contact"
+  name: "Olay Müdahale Ekibi İletişim"
+  description: "Olay müdahale ekibi iletişim bilgilerinin mevcut olup olmadığını kontrol eder"
+  category: "incident_response"
+  severity: "high"
+  weight: 8
+  
+check:
+  field: "security.incident_response.incident_response_team_contact"
+  operator: "not_empty"
+  expected_value: ""
+  
+message:
+  pass: "Olay müdahale ekibi iletişim bilgileri mevcut"
+  fail: "Olay müdahale ekibi iletişim bilgileri eksik - acil durum planı eksik!"
+  
+remediation:
+  action: "setup_incident_team_contact"
+  script: "scripts/setup_incident_team_contact.ps1"
+  description: "Olay müdahale ekibi iletişim bilgilerini ayarla"

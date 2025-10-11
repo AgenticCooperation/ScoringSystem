@@ -1,0 +1,21 @@
+rule:
+  id: "data_masking"
+  name: "Veri Maskeleme"
+  description: "Veri maskelemenin etkin olup olmadığını kontrol eder"
+  category: "data_protection"
+  severity: "medium"
+  weight: 6
+  
+check:
+  field: "security.data_protection.data_masking"
+  operator: "equals"
+  expected_value: true
+  
+message:
+  pass: "Veri maskeleme etkin"
+  fail: "Veri maskeleme devre dışı - veri güvenliği riski!"
+  
+remediation:
+  action: "enable_data_masking"
+  script: "scripts/enable_data_masking.ps1"
+  description: "Veri maskelemeyi etkinleştir"

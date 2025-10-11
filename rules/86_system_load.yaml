@@ -1,0 +1,21 @@
+rule:
+  id: "system_load"
+  name: "Sistem Yükü"
+  description: "Sistem yükünü kontrol eder"
+  category: "performance"
+  severity: "medium"
+  weight: 4
+  
+check:
+  field: "security.performance.system_load"
+  operator: "less_than"
+  expected_value: 2.0
+  
+message:
+  pass: "Sistem yükü normal"
+  fail: "Sistem yükü yüksek - performans sorunu riski!"
+  
+remediation:
+  action: "optimize_system_load"
+  script: "scripts/optimize_system_load.ps1"
+  description: "Sistem yükünü optimize et"

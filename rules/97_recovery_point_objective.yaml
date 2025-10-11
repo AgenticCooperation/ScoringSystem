@@ -1,0 +1,21 @@
+rule:
+  id: "recovery_point_objective"
+  name: "Kurtarma Noktası Hedefi"
+  description: "Kurtarma noktası hedefinin uygun olup olmadığını kontrol eder"
+  category: "backup_recovery"
+  severity: "medium"
+  weight: 6
+  
+check:
+  field: "security.backup_recovery.recovery_point_objective"
+  operator: "less_than"
+  expected_value: 1
+  
+message:
+  pass: "Kurtarma noktası hedefi uygun"
+  fail: "Kurtarma noktası hedefi uzun - veri kaybı riski!"
+  
+remediation:
+  action: "improve_recovery_point"
+  script: "scripts/improve_recovery_point.ps1"
+  description: "Kurtarma noktasını iyileştir"

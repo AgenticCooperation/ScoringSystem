@@ -1,0 +1,21 @@
+rule:
+  id: "incident_response_policy"
+  name: "Olay Müdahale Politikası"
+  description: "Olay müdahale politikasının mevcut olup olmadığını kontrol eder"
+  category: "policy_management"
+  severity: "high"
+  weight: 8
+  
+check:
+  field: "security.security_policies.incident_response_policy"
+  operator: "equals"
+  expected_value: true
+  
+message:
+  pass: "Olay müdahale politikası mevcut"
+  fail: "Olay müdahale politikası eksik - müdahale eksikliği!"
+  
+remediation:
+  action: "create_incident_response_policy"
+  script: "scripts/create_incident_response_policy.ps1"
+  description: "Olay müdahale politikası oluştur"

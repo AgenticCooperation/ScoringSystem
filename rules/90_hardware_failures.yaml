@@ -1,0 +1,21 @@
+rule:
+  id: "hardware_failures"
+  name: "Donanım Arızaları"
+  description: "Donanım arıza sayısını kontrol eder"
+  category: "system_health"
+  severity: "high"
+  weight: 8
+  
+check:
+  field: "security.health.hardware_failures"
+  operator: "equals"
+  expected_value: 0
+  
+message:
+  pass: "Donanım arızası yok"
+  fail: "Donanım arızaları var - donanım değişimi gerekebilir!"
+  
+remediation:
+  action: "investigate_hardware_failures"
+  script: "scripts/investigate_hardware_failures.ps1"
+  description: "Donanım arızalarını araştır"

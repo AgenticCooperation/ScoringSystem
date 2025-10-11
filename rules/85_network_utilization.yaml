@@ -1,0 +1,21 @@
+rule:
+  id: "network_utilization"
+  name: "Ağ Kullanımı"
+  description: "Ağ kullanım yüzdesini kontrol eder"
+  category: "performance"
+  severity: "low"
+  weight: 3
+  
+check:
+  field: "security.performance.network_utilization_percent"
+  operator: "less_than"
+  expected_value: 80
+  
+message:
+  pass: "Ağ kullanımı normal"
+  fail: "Ağ kullanımı yüksek - performans sorunu riski!"
+  
+remediation:
+  action: "optimize_network_usage"
+  script: "scripts/optimize_network_usage.ps1"
+  description: "Ağ kullanımını optimize et"

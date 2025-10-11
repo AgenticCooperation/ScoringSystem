@@ -1,0 +1,21 @@
+rule:
+  id: "disaster_recovery_plan"
+  name: "Afet Kurtarma Planı"
+  description: "Afet kurtarma planının mevcut olup olmadığını kontrol eder"
+  category: "backup_recovery"
+  severity: "high"
+  weight: 8
+  
+check:
+  field: "security.backup_recovery.disaster_recovery_plan"
+  operator: "equals"
+  expected_value: true
+  
+message:
+  pass: "Afet kurtarma planı mevcut"
+  fail: "Afet kurtarma planı eksik - iş sürekliliği riski!"
+  
+remediation:
+  action: "create_disaster_recovery_plan"
+  script: "scripts/create_disaster_recovery_plan.ps1"
+  description: "Afet kurtarma planı oluştur"

@@ -1,0 +1,21 @@
+rule:
+  id: "security_incidents"
+  name: "Güvenlik Olayları"
+  description: "Son 30 gündeki güvenlik olay sayısını kontrol eder"
+  category: "incident_response"
+  severity: "medium"
+  weight: 6
+  
+check:
+  field: "security.incident_response.security_incidents_30d"
+  operator: "less_than"
+  expected_value: 5
+  
+message:
+  pass: "Güvenlik olay sayısı normal"
+  fail: "Yüksek güvenlik olay sayısı - güvenlik durumu değerlendirilmeli!"
+  
+remediation:
+  action: "review_security_incidents"
+  script: "scripts/review_security_incidents.ps1"
+  description: "Güvenlik olaylarını gözden geçir"

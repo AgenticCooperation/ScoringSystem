@@ -1,0 +1,21 @@
+rule:
+  id: "blue_screen_count"
+  name: "Mavi Ekran Sayısı"
+  description: "Son 30 gündeki mavi ekran sayısını kontrol eder"
+  category: "system_health"
+  severity: "critical"
+  weight: 10
+  
+check:
+  field: "security.health.blue_screen_count_30d"
+  operator: "equals"
+  expected_value: 0
+  
+message:
+  pass: "Mavi ekran yok"
+  fail: "Mavi ekran olayları var - kritik sistem sorunu!"
+  
+remediation:
+  action: "investigate_blue_screens"
+  script: "scripts/investigate_blue_screens.ps1"
+  description: "Mavi ekran olaylarını araştır"

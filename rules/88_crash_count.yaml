@@ -1,0 +1,21 @@
+rule:
+  id: "crash_count"
+  name: "Çökme Sayısı"
+  description: "Son 7 gündeki çökme sayısını kontrol eder"
+  category: "system_health"
+  severity: "high"
+  weight: 8
+  
+check:
+  field: "security.health.crash_count_7d"
+  operator: "less_than"
+  expected_value: 3
+  
+message:
+  pass: "Çökme sayısı normal"
+  fail: "Yüksek çökme sayısı - sistem kararlılığı riski!"
+  
+remediation:
+  action: "investigate_crashes"
+  script: "scripts/investigate_crashes.ps1"
+  description: "Çökmeleri araştır ve düzelt"

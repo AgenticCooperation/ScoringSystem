@@ -1,0 +1,21 @@
+rule:
+  id: "backup_verified"
+  name: "Yedekleme Doğrulama"
+  description: "Yedeklemenin doğrulanıp doğrulanmadığını kontrol eder"
+  category: "backup_recovery"
+  severity: "high"
+  weight: 8
+  
+check:
+  field: "security.backup_recovery.backup_verified"
+  operator: "equals"
+  expected_value: true
+  
+message:
+  pass: "Yedekleme doğrulanmış"
+  fail: "Yedekleme doğrulanmamış - veri kurtarma riski!"
+  
+remediation:
+  action: "verify_backup"
+  script: "scripts/verify_backup.ps1"
+  description: "Yedeklemeyi doğrula"

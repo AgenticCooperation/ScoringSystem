@@ -1,0 +1,21 @@
+rule:
+  id: "acceptable_use_policy"
+  name: "Kabul Edilebilir Kullanım Politikası"
+  description: "Kabul edilebilir kullanım politikasının mevcut olup olmadığını kontrol eder"
+  category: "policy_management"
+  severity: "medium"
+  weight: 5
+  
+check:
+  field: "security.security_policies.acceptable_use_policy"
+  operator: "equals"
+  expected_value: true
+  
+message:
+  pass: "Kabul edilebilir kullanım politikası mevcut"
+  fail: "Kabul edilebilir kullanım politikası eksik - politika eksikliği!"
+  
+remediation:
+  action: "create_acceptable_use_policy"
+  script: "scripts/create_acceptable_use_policy.ps1"
+  description: "Kabul edilebilir kullanım politikası oluştur"

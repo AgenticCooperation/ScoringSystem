@@ -1,0 +1,21 @@
+rule:
+  id: "mttd_performance"
+  name: "MTTD Performansı"
+  description: "Mean Time To Detection performansını kontrol eder"
+  category: "incident_response"
+  severity: "medium"
+  weight: 6
+  
+check:
+  field: "security.incident_response.mttd_hours"
+  operator: "less_than"
+  expected_value: 24
+  
+message:
+  pass: "MTTD performansı iyi"
+  fail: "MTTD performansı zayıf - tespit süresi uzun!"
+  
+remediation:
+  action: "improve_mttd"
+  script: "scripts/improve_mttd.ps1"
+  description: "MTTD performansını iyileştir"

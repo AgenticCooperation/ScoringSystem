@@ -1,0 +1,21 @@
+rule:
+  id: "data_handling_policy"
+  name: "Veri İşleme Politikası"
+  description: "Veri işleme politikasının mevcut olup olmadığını kontrol eder"
+  category: "policy_management"
+  severity: "high"
+  weight: 8
+  
+check:
+  field: "security.security_policies.data_handling_policy"
+  operator: "equals"
+  expected_value: true
+  
+message:
+  pass: "Veri işleme politikası mevcut"
+  fail: "Veri işleme politikası eksik - veri güvenliği riski!"
+  
+remediation:
+  action: "create_data_handling_policy"
+  script: "scripts/create_data_handling_policy.ps1"
+  description: "Veri işleme politikası oluştur"
