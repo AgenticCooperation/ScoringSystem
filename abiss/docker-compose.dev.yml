@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  # Development için ek konfigürasyonlar
+  abiss:
+    volumes:
+      # Development için kod değişikliklerini canlı takip et
+      - ./app:/app/app
+      - ./alembic:/app/alembic
+      - ./alembic.ini:/app/alembic.ini
+    environment:
+      DEBUG: "true"
+      # Development için daha detaylı loglama
+      LOG_LEVEL: "DEBUG"
+    command: >
+      sh -c "
+        echo 'Development mode starting...' &&
+        echo 'Running Alembic migrations...' &&
+        alembic upgrade head &&
+        echo 'Starting ABISS application in development mode...' &&
+        uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload --log-level debug
+      "
+
+  # Development için Redis (gelecekte caching için)
+  redis:
+    image: redis:7-alpine
+    container_name: abiss_redis
+    ports:
+      - "6379:6379"
+    networks:
+      - abiss_network
+    restart: unless-stopped
+    command: redis-server --appendonly yes
+    volumes:
+      - redis_data:/data
+
+volumes:
+  redis_data:
+    driver: local
