@@ -1,6 +1,8 @@
 from fastapi import FastAPI, HTTPException, Depends
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, Session
+from starlette.middleware.cors import CORSMiddleware
+
 from src.app.models import Base, User, UserCreate, UserUpdate, UserResponse
 import os
 
@@ -17,6 +19,14 @@ Base.metadata.create_all(bind=engine)
 
 # FastAPI uygulaması
 app = FastAPI(title="FastAPI Users API", version="1.0.0")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+    allow_credentials=True,
+)
 
 # Veritabanı bağımlılığı
 def get_db():
