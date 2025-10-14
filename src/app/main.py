@@ -1,8 +1,7 @@
 from fastapi import FastAPI, HTTPException, Depends
-from sqlalchemy import create_engine, Column, Integer, String
-from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, Session
-from pydantic import BaseModel
+from .models import Base, User, UserCreate, UserUpdate, UserResponse
 import os
 
 # Veritabanı bağlantısı
@@ -11,36 +10,7 @@ DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://postgres:password@db:5432
 engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
-Base = declarative_base()
-
-# User modeli
-class User(Base):
-    __tablename__ = "users"
-    
-    id = Column(Integer, primary_key=True, index=True)
-    name = Column(String, index=True)
-    email = Column(String, unique=True, index=True)
-    age = Column(Integer)
-
-# Pydantic modelleri
-class UserCreate(BaseModel):
-    name: str
-    email: str
-    age: int
-
-class UserUpdate(BaseModel):
-    name: str = None
-    email: str = None
-    age: int = None
-
-class UserResponse(BaseModel):
-    id: int
-    name: str
-    email: str
-    age: int
-    
-    class Config:
-        from_attributes = True
+ 
 
 # Veritabanı tablosunu oluştur
 Base.metadata.create_all(bind=engine)
