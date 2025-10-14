@@ -1,7 +1,7 @@
 from fastapi import FastAPI, HTTPException, Depends
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, Session
-from .models import Base, User, UserCreate, UserUpdate, UserResponse
+from src.app.models import Base, User, UserCreate, UserUpdate, UserResponse
 import os
 
 # Veritabanı bağlantısı
