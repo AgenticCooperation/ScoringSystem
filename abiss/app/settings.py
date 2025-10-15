@@ -13,7 +13,7 @@ class Settings(BaseSettings):
     telemetry_schema_version: str = "1.0"
     
     # Application
-    app_name: str = "ABISS - Advanced Backend Intelligence Scoring System"
+    app_name: str = "ABISS - AI-Based Automated Security Scoring and Hardening"
     app_version: str = "1.0.0"
     debug: bool = False
     

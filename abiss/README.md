@@ -1,4 +1,4 @@
-# ABISS - Advanced Backend Intelligence Scoring System
+# ABISS - AI-Based Automated Security Scoring and Hardening
 
 ABISS, endpoint güvenlik durumunu değerlendiren ve skorlayan modern bir FastAPI uygulamasıdır.
 

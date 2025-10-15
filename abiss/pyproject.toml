@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "abiss"
 version = "1.0.0"
-description = "Advanced Backend Intelligence Scoring System"
+description = "AI-Based Automated Security Scoring and Hardening"
 authors = [
     {name = "ABISS Team", email = "team@abiss.com"}
 ]

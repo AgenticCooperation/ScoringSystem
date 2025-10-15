@@ -8,7 +8,7 @@ from app.routers import endpoints, telemetry, findings, scores, remediations
 app = FastAPI(
     title=settings.app_name,
     version=settings.app_version,
-    description="Advanced Backend Intelligence Scoring System",
+    description="AI-Based Automated Security Scoring and Hardening",
     docs_url="/docs",
     redoc_url="/redoc"
 )
@@ -41,7 +41,7 @@ async def startup_event():
 async def root():
     """Ana endpoint"""
     return {
-        "message": "ABISS - Advanced Backend Intelligence Scoring System",
+        "message": "ABISS - AI-Based Automated Security Scoring and Hardening",
         "version": settings.app_version,
         "docs": "/docs",
         "redoc": "/redoc"
